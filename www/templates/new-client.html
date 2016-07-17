@@ -1,0 +1,149 @@
+<ion-view view-title="New Client">
+
+	<ion-nav-buttons side="primary">
+		 <button class="button correctSize" ng-click="cancelNewClient()">Cancel</button>   
+	 </ion-nav-buttons>
+	<ion-nav-buttons side="secondary">
+	<button class="button correctSize" ng-click="saveNewClient()" >Save</button>   
+	<!-- ng-disabled="formIsIncomplete" -->
+	</ion-nav-buttons>
+	  <ion-content class="padding">
+	  <ti-segmented-control on-select="buttonClicked($index)">
+	        <ti-segmented-control-button class="button-energized" title="'Parent'" selected>
+	        </ti-segmented-control-button>
+
+	        <ti-segmented-control-button class="button-energized" title="'Kid'" >
+	        </ti-segmented-control-button>
+
+	        <ti-segmented-control-button class="button-energized" title="'Task'">
+	        </ti-segmented-control-button>
+	    </ti-segmented-control>
+	<div ng-switch on="selectedIndex">
+<form name="newClientForm" novalidate>
+<!-- ******************************** Parent sub-page ******************************** -->
+    <div id="parent" class="padding list" ng-switch-when="0" >
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">First Name</span>
+	    <input ng-model="newClient.parents.parentFirstname" type="text" placeholder="John" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Last Name</span>
+	    <input ng-model="newClient.parents.parentLastname" type="text" placeholder="Smith" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Parent Notes</span>
+	    <input ng-model="newClient.parents.parentNotes" type="text" placeholder="Has access to child" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+		  <span class="input-label">Street</span>
+		  <input ng-model="newClient.parents.parentStreet" type="text" placeholder="1229 this place ave" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+		  <span class="input-label">Unit</span>
+		  <input ng-model="newClient.parents.parentUnit" type="text" placeholder="504">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+		  <span class="input-label">City</span>
+		  <input ng-model="newClient.parents.parentCity" type="text" placeholder="Ottawa" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+		  <span class="input-label">State</span>
+		  <input ng-model="newClient.parents.parentState" type="text" placeholder="ON" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+		  <span class="input-label">Zip Code</span>
+		  <input ng-model="newClient.parents.parentZipcode" type="text" placeholder="K2BKJ8" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label"> Primary Phone Number</span>
+	     <input ng-model="newClient.parents.parentPrimaryphone" type="tel" placeholder="6134438578" required>
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label"> Secondary Phone Number</span>
+	     <input ng-model="newClient.parents.parentSecondaryphone" type="tel" placeholder="6134438578">
+	  </label>
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Email</span>
+	    <input ng-model="newClient.parents.parentEmailid" type="text" placeholder="john@smith.com">
+	  </label>
+	</div>
+	   
+	  
+
+
+<!-- ******************************** Kid sub-page ******************************** -->
+  <div id="kid" class="list" ng-switch-when="1">
+  		  <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+          <img ng-show="imgURI === undefined" ng-src="http://placehold.it/300x300">
+          <button class="button" ng-click="takePicture()">Take Picture</button>
+	  	<label class="item item-input item-stacked-label">
+		    <span class="input-label">First Name</span>
+		    <input ng-model="newClient.kids.kidFirstname" type="text" placeholder="Jack" required>
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Last Name</span>
+		    <input ng-model="newClient.kids.kidLastname" type="text" placeholder="Smith" required>
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span  class="input-label">Birthday</span>
+		     <input ng-model="newClient.kids.kidBirthdate" type="date">
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span  class="input-label">Gender</span>
+		    <input ng-model="newClient.kids.kidGender" type="text" placeholder="Female" required>
+		  </label>
+		  <label class="item item-input item-stacked-label">
+			  <span class="input-label">Notes</span>
+			  <input ng-model="newClient.kids.kidNotes" type="text" placeholder="He is a very active child">
+		  </label>
+		  <label class="item item-input item-stacked-label">
+			  <span class="input-label">Allergies</span>
+			  <input ng-model="newClient.allergies.allergyDescription" type="text" placeholder="Peanuts">
+		  </label>
+		   <label class="item item-input item-stacked-label">
+			  <span  class="input-label">Disabilities</span>
+			  <input ng-model="newClient.disabilities.disabilityDescription"type="text" placeholder="ADHD">
+		  </label>
+		  <label class="item item-input item-stacked-label">
+			  <span  class="input-label">Medications</span>
+			  <input ng-model="newClient.disabilities.medicationDescription"type="text" placeholder="ADHD">
+		  </label>
+		   
+  </div>
+
+  <!-- ******************************** Task sub-page ******************************** -->
+    <div id="task" class="list"  ng-switch-when="2">
+    <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task Title</span>
+		    <input ng-model="newClient.tasks.taskTitle" type="text" placeholder="Give medication" required>
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task Description</span>
+		    <input ng-model="newClient.tasks.taskDescription" type="text" placeholder="more details as needed">
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task Start Date</span>
+		    <input ng-model="newClient.tasks.taskStartdate" type="date"required >
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task End Date</span>
+		    <input ng-model="newClient.tasks.taskEnddate" type="date" required>
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task Start Time</span>
+		    <input ng-model="newClient.tasks.taskStarttime" type="text" placeholder="5.30pm" required> 
+		  </label>
+		  <label class="item item-input item-stacked-label">
+		    <span class="input-label">Task End Time</span>
+		    <input ng-model="newClient.tasks.taskEndtime" type="text" placeholder="6.30pm" required>
+		  </label>
+		   <label class="item item-input item-stacked-label">
+			  <span class="input-label">Notes</span>
+			  <input ng-model="newClient.tasks.taskNotes" type="text" placeholder="He is a very active child">
+		  </label>
+    </div>
+  </form>
+
+
+  </ion-content>
+</ion-view>

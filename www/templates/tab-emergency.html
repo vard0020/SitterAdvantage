@@ -1,0 +1,57 @@
+<ion-view view-title="Emergency">
+  <ion-content>
+    <div class="item item-divider">
+        In case of Emergency
+    </div>
+    <!-- <ion-list> -->
+    <div class="padding">
+        <button class="button button-block icon-left button-assertive" ng-click="callNumber(311)">Call 311</button>
+        <button class="button button-block icon-left ion-location" ng-click="showModal()"> Show My Location </button>
+    </div>
+     
+         <div class="item item-divider">
+            Parent info
+            </div>
+ <div class="list">
+
+      <div class="item item-button-right">
+            <h3>John Smith</h3>
+            <span class="ios-blue"> mobile </span>
+            <p> 613-853-9911 </p>
+            
+             <a ng-href="sms:13332221111&body={{ sosMessage }}" class="button button-positive button-clear" id="parent1"> 
+             <!-- ng-click="sendSMS(6138539911)" -->
+              <i id="position" class="icon ion-ios-chatbubble"></i>
+            </a>
+            <button class="button button-positive button-clear" ng-click="callNumber(6138539911)">
+              <i class="icon ion-ios-telephone"></i>
+            </button>
+
+            <span class="ios-blue"> address </span>
+            <p>213 Portogul Ave.</p>
+            <p>Nepean, ON</p>
+            <p>K2B 8J6</p>
+      </div>
+
+      <div class="item item-button-right">
+            <h3>Carolyn Smith</h3>
+            <span class="ios-blue"> mobile </span>
+            <p>613-853-9911</p>
+            
+             <a href="sms:13332221111&body={{ sosMessage }}" id="parent2" class="button button-positive button-clear"> 
+             <!-- ng-click="sendSMS(6138539911)" -->
+              <i id="position" class="icon ion-ios-chatbubble"></i>
+            </a>
+            <button class="button button-positive button-clear" ng-click="callNumber(6138539911)">
+              <i class="icon ion-ios-telephone"></i>
+            </button>
+
+            <span class="ios-blue"> address </span>
+            <p>213 Portogul Ave.</p>
+            <p>Nepean, ON</p>
+            <p>K2B 8J6</p>
+      </div>    
+                        
+</div>  
+  </ion-content>
+</ion-view>

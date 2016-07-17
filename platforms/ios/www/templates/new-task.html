@@ -1,0 +1,68 @@
+<ion-view view-title="New Task">
+<!-- save and cancel buttons    -->
+     <ion-nav-buttons side="primary">
+      <button class="button correctSize" ng-click="cancelNewTask()">Cancel</button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="secondary">
+      <button class= "button correctSize" ng-click="saveNewTask(cid)">Save</button>
+    </ion-nav-buttons>
+
+  <ion-content>
+      <ion-list class="item-icon-right">
+      
+	      <label class="item item-input item-select">  
+			    <div class="input-label">
+			      Client Description
+			    </div>
+			    <!-- <option value="{{client.clientId}}"> {{client.clientDesc}} </option>   loadKiddy(client.clientId) -->
+			    <select ng-model="cid" ng-change="loadKiddy(cid)" >
+			    	<option ng-repeat="client in clientList" value="{{client.clientId}}">{{client.clientDesc}}</option>
+			    </select>
+
+		  </label> 
+
+		   <label class="item item-input item-select">     
+			    <div class="input-label"> 
+			      Kid Name
+			    </div>
+			    <!-- <option value="{{}}">{{kid.kidName}}</option> -->
+			    <select ng-model="kId">
+			    	<option ng-repeat="kid in kids">{{kid.kidFirstname}}</option>
+			    </select>
+		  </label>  
+
+		  <label class="item item-input">
+		    	<input ng-model="newTask.taskTitle" type="text" placeholder="Task Title">
+		  </label>
+
+		   <label class="item item-input">
+   				 <textarea ng-model="newTask.taskDescription" placeholder="Task Description"></textarea>
+ 		   </label>
+
+		  <label class="item item-input">
+				  <span class="input-label">Start Date</span>
+				  <input ng-model="newTask.startDate" type="date">
+		   </label>
+
+		   <label class="item item-input">
+				  <span class="input-label">End Date</span>
+				  <input ng-model="newTask.endDate" type="date">
+		    </label>
+
+		    <label class="item item-input">
+				  <span class="input-label">Start Time</span>
+				  <input ng-model="newTask.startTime" type="time">
+			</label>
+
+		    <label class="item item-input">
+				  <span class="input-label">End Time</span>
+				  <input ng-model="newTask.endTime"type="time">
+			</label>
+
+			 <label class="item item-input">
+   				 <textarea ng-model="newTask.taskNotes" placeholder="Task Notes"></textarea>
+ 		   </label>
+
+</ion-list>
+  </ion-content>
+</ion-view>

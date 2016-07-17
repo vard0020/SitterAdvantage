@@ -1,0 +1,91 @@
+<ion-view cache-view="false" view-title="{{selectedClient.clientDesc}}">
+  <ion-nav-buttons side="secondary">
+      <button class="button correctSize" ng-click="editClient()">Edit</button>   
+    </ion-nav-buttons>
+  <ion-content class="padding">
+    <ti-segmented-control on-select="buttonClicked($index)" class="padding-bottom">
+        <ti-segmented-control-button class="button-energized" title="'Parents'" selected>
+        </ti-segmented-control-button>
+
+        <ti-segmented-control-button class="button-energized" title="'Kids'" >
+        </ti-segmented-control-button>
+
+        <ti-segmented-control-button class="button-energized" title="'Tasks'">
+        </ti-segmented-control-button>
+    </ti-segmented-control>
+
+<div ng-switch on="selectedIndex">
+<!-- ******************************** Parent sub-page ******************************** -->
+    <div id="parent"  ng-repeat="parent in selectedClient.parents" class="padding" ng-switch-when="0">
+      <ion-list>
+          <ion-item class="item-remove-animate" type="item-text-wrap" >
+          <h2 class="ios-blue">{{parent.parentFirstname + " " + parent.parentLastname}}</h2>
+            <h4>Address:</h4>
+            <p>{{parent.parentStreet}}</p>
+            <p>{{parent.parentCity +", "+ parent.parentState}}</p>
+            <p>{{parent.parentZipcode}}</p>
+            <h4>Primary phone:</h4>
+            <p>{{parent.parentPrimaryphone}}</p>
+            <h4>Secondary phone:</h4>
+            <p>{{parent.parentSecondaryphone}}</p>
+            <h4>Email:</h4>
+            <p>{{parent.parentEmailid}}</p>
+            <h4>Notes:</h4>
+            <p>{{parent.parentNotes}}</p>
+          </ion-item>
+    </ion-list>
+
+    </div>
+
+<!-- ******************************** Kid sub-page ******************************** -->
+  <div id="kid" ng-repeat="kid in selectedClient.kids" class="list" ng-switch-when="1">
+        <ion-item class="item item-thumbnail-left" href="#">
+          <img ng-src="img/{{kid.kidPicture}}">
+          <h2 class="ios-blue">{{kid.kidFirstname}}</h2>
+          <h4>Gender:</h4>
+          <p>{{kid.kidGender}}</p>
+          <h4>Birthday:</h4>
+          <p>{{ kid.kidBirthdate}}</p>
+          <h4>Allergies:</h4>
+          <p>{{selectedClient.allergies.allergyDescription}}</p>
+          <h4>Disabilities:</h4>
+          <p>{{selectedClient.disabilities.disabilityDescription}}</p>
+          <h4>Medications:</h4>
+          <p>{{selectedClient.medications.medicationDescription}}</p>
+          <h4>Notes:</h4>
+          <p>{{kid.kidNotes}}</p>    
+        </ion-item>
+
+</div>
+
+
+<!-- ******************************** Task sub-page ******************************** -->
+    <div id="task" ng-repeat="task in selectedClient.tasks" ng-switch-when="2">
+          
+      <ion-list class="item-icon-right">
+        <div class="item item-divider">{{task.taskStartdate}}</div>
+          <ion-item href="#" type="item-text-wrap">
+              <h2 class="ios-blue">{{task.taskTitle}}</h2>
+              <h4>Description</h4>
+              <p>{{task.taskDescription}}</p>
+              <h4>Start Date</h4>
+              <p>{{task.taskStartdate}}</p>
+              <h4>End Date</h4>
+              <p>{{task.taskEnddate}}</p>
+              <h4>Start time</h4>
+              <p>{{task.taskStarttime}}</p>
+              <h4>End time</h4>
+              <p>{{task.taskEndtime}}</p>
+              <h4>Notes</h4>
+              <p>{{task.taskNotes}}</p>
+          </ion-item>
+      </ion-list>
+
+    </div>
+<!-- ******************************** Task sub-page ******************************** -->
+    </div>
+
+
+
+   </ion-content>
+</ion-view>
