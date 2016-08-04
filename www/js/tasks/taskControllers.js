@@ -88,12 +88,9 @@ angular.module('SitterAdvantage.taskControllers', [])
           }
       }
 
-      
-
-
   }])
 
-.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams","Clients", function ($scope, Tasks,$stateParams,Clients) {
+.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {
   
   console.log("inside task details controller");
 
@@ -103,5 +100,16 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   // $scope.selectedClient = Clients.getById($stateParams.client_id);
   $scope.task = Tasks.get($stateParams.taskId);
+
+  $scope.editTaskDetails = function() {
+    $state.go ("tab.edit-task-detail");
+    
+}
               
-}]);
+}])
+
+.controller('EditTasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {
+
+
+}])
+;

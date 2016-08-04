@@ -17,7 +17,10 @@
 /* Nune code for emergency page to float messaging and phone icons side by side */
 #position {
     bottom: 0;
-    width: 100px;
+    width: 40px;
+}
+
+
 }
 /********************** iframe *******************************/
 
