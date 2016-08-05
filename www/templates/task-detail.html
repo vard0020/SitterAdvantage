@@ -1,85 +1,69 @@
 <ion-view view-title="Task Details">
-<ion-nav-buttons side="secondary">
-     <button class="button correctSize" ng-click="editTaskDetails()" ng-hide="toggleVisibility">Edit</button>
-     <button class="button correctSize" ng-click="saveTaskDetails()" ng-show="toggleVisibility">Save</button>     
-   </ion-nav-buttons>
- <ion-content>
-     <!--  <div class="list">
-        <div class="item item-button-right">
-            <h2 class="ios-blue">{{task.taskTitle}}</h2>
-              <h4>Description</h4>
-              <p>{{task.taskDescription}}</p>
-              <h4>Start Date</h4>
-              <p>{{task.taskStartdate}}</p>
-              <h4>End Date</h4>
-              <p>{{task.taskEnddate}}</p>
-              <h4>Start time</h4>
-              <p>{{task.taskStarttime}}</p>
-              <h4>End time</h4>
-              <p>{{task.taskEndtime}}</p>
-              <h4>Notes</h4>
-              <p>{{task.taskNotes}}</p>
-    </div> -->
+	<ion-nav-buttons side="secondary">
+		<button class="button correctSize" ng-click="editTaskDetails()" ng-hide="toggleVisibility">Edit</button>
+		<button class="button correctSize" ng-click="saveTaskDetails()" ng-show="toggleVisibility">Save</button>
+	</ion-nav-buttons>
+	<ion-content>
+		<!-- ******************************** Task sub-page ******************************** -->
+		<div id="task" class="card">
 
-    <div class="list">
+			<div class="item item-text-wrap">
 
-  <label class="item item-input">
-    <div class="input-label">
-      Task Title
-    </div>
-    <input type="text" placeholder="Hello there" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+				<div style="margin-bottom:15px;">
+					<h2>Task Title</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-  <label class="item item-input">
-    <div class="input-label">
-      Task Description
-    </div>
-    <input type="text" placeholder="Hello there" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Task Title" value="{{task.taskTitle}}">
+				</div>
 
-  <label class="item item-input">
-    <div class="input-label">
-      Task Start Date
-    </div>
-    <input type="date" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+				<div style="margin-bottom:15px;">
+					<h2>Description</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-  <label class="item item-input">
-    <div class="input-label">
-      Task End Date
-    </div>
-    <input type="date" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Description" value="{{task.taskDescription}}">
+				</div>
 
-  <label class="item item-input">
-    <div class="input-label">
-      Task Start Time
-    </div>
-    <input type="time" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+				<div style="margin-bottom:15px;">
+					<h2>Start Date</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-   <label class="item item-input">
-    <div class="input-label">
-      Task End Time
-    </div>
-    <input type="time" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Start Date" value="{{task.taskStartdate}}">
 
-    <label class="item item-input">
-    <div class="input-label">
-      Task Notes
-    </div>
-    <input type="text" placeholder="Hello there" class="my-changes" ng-disabled= "!disableEnableForm()">
-  </label>
+				</div>
 
-  <div class="item item-divider" ng-show="toggleVisibility"></div>
+				<div style="margin-bottom:15px;">
+					<h2>End Date</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-      <button class="button button-assertive button-block button-clear" ng-click="deleteTaskDetails()" ng-show="toggleVisibility"> 
-              Delete Task
-      </button>
-    
-    <div class="item item-divider" ng-show="toggleVisibility"></div>
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="End Date" value="{{task.taskEnddate}}">
+				</div>
+				<div style="margin-bottom:15px;">
+					<h2>Start time</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-</div>
-  </ion-content>
-</ion-view>                    
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Start time" value="{{task.taskStarttime}}">
+
+				</div>
+				<div style="margin-bottom:15px;">
+					<h2>End time</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="End Time" value="{{task.taskEndtime}}">
+
+				</div>
+				<div style="margin-bottom:15px;">
+					<h2>Notes</h2>
+					<hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+					<input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Notes" value="{{task.taskNotes}}">
+				</div>
+			</div>
+		</div>
+
+		<div class="padding" ng-show="toggleVisibility">
+
+			<button class="button button-assertive button-block" ng-click="deleteTaskDetails()" ng-show="toggleVisibility">
+				Delete Task
+			</button>
+		</div>
+	</ion-content>
+</ion-view>

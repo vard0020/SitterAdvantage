@@ -90,6 +90,29 @@ h3 {
      
 =======
 /********************** Padding *******************************/
+/*
+input:disabled {
+background-color: #a2ddf4;
+    color: #999;
+}
+*/
+
+/*
+.textDisable[disabled] {
+   background-color: #fff;
+}
+*/
+
+.textDisable {
+  background-color: red;
+  padding: 7px 13px;
+  color: white;
+  border: 1px solid red;
+  font-weight: bold;
+}
+.textDisable[disabled] {
+  background-color: #fff;
+}
 
 .my-changes{
 
