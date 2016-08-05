@@ -19,9 +19,11 @@ angular.module('SitterAdvantage',
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-
+                       
   if (ionic.Platform.isWebView()) {
-      db = window.sqlitePlugin.openDatabase({ name: "my.db2", iosDatabaseLocation: 'default'}); //device
+      db = window.sqlitePlugin.openDatabase({ name: "my2.db", iosDatabaseLocation: 'default'}); //device
+                       
+   // db = window.sqlitePlugin.openDatabase({name: "my.db", location: 2, createFromLocation: 1});
    }else{
      db = window.openDatabase("sitter.db", '1', 'Sitter Database', 1024 * 1024 * 10); // browser
   }
@@ -80,15 +82,20 @@ angular.module('SitterAdvantage',
     })
   .state('tab.task-detail', {
      url: '/tasks/:taskId',
-    // params: {
-    //   'client_id': '1', 
-    //   'task_id': '1'
-    // },
-
     views: {
       'tab-tasks': {
         templateUrl: 'templates/task-detail.html',
         controller: 'TasksDetailCtrl'
+      }
+    }
+  })
+
+   .state('tab.edit-task-detail', {
+     url: '/tasks/edit-task-detail',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/edit-task-detail.html',
+        controller: 'EditTasksDetailCtrl'
       }
     }
   })

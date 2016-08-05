@@ -1,0 +1,43 @@
+<ion-view view-title="Edit Task Detail">
+ <ion-content>
+
+      <label class="item item-input">
+          <input ng-model="newTask.taskTitle" type="text" placeholder="Task Title">
+      </label>
+
+       <label class="item item-input">
+           <textarea ng-model="newTask.taskDescription" placeholder="Task Description"></textarea>
+       </label>
+
+      <label class="item item-input">
+          <span class="input-label">Start Date</span>
+          <input ng-model="newTask.startDate" type="date">
+       </label>
+
+       <label class="item item-input">
+          <span class="input-label">End Date</span>
+          <input ng-model="newTask.endDate" type="date">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Start Time</span>
+          <input ng-model="newTask.startTime" type="time">
+      </label>
+
+        <label class="item item-input">
+          <span class="input-label">End Time</span>
+          <input ng-model="newTask.endTime"type="time">
+      </label>
+
+       <label class="item item-input">
+           <textarea ng-model="newTask.taskNotes" placeholder="Task Notes"></textarea>
+       </label>
+      </div>
+      <div class="padding">
+      <button class="button button-assertive button-block button-positive" ng-click="deleteTaskDetails()"> 
+              Delete Task
+      </button>
+      </div>
+
+    </ion-content>
+    </ion-view>     

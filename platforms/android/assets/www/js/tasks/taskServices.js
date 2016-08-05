@@ -38,15 +38,33 @@ angular.module('SitterAdvantage.taskServices', [])
   var createNewTask = function(params){
         
         console.log("inside createNewTask");
-        var query = "INSERT INTO tasks (taskTitle, taskDescription, taskStartdate, taskEnddate, taskStarttime, taskEndtime, taskNotes, clientId) VALUES (?,?,?,?,?,?,?,?)";
+        console.log(params);
+
+        var query = "INSERT INTO tasks (taskTitle, taskDescription, taskStartdate, taskEnddate, taskStarttime, taskEndtime, taskNotes, clientId,kidId) VALUES (?,?,?,?,?,?,?,?,?)";
+        // var query = "INSERT INTO tasks (taskTitle, taskDescription, taskStartdate, taskEnddate, taskStarttime, taskEndtime, taskNotes, clientId,kidId) VALUES (?,?,?,?,?,?,?,?,?)";
 
         var querySuccessCallback = function(tx, res) {
           // console.log(res.insertId);   
-        // // get task id for new client after adding it.
-        // taskId = res.insertId; 
-        console.log("insert statement for adding a newTask succeeded");  
-        console.log(params.startDate);
+            // // get task id for new client after adding it.
+            // taskId = res.insertId; 
+            console.log("insert statement for adding a newTask succeeded");  
+            console.log(params);
+            console.log(res);
 
+            console.log("should add new task to list of tasks");
+
+            tasks.push({
+              "taskId":res.insertId, 
+                "taskTitle":params.taskTitle, 
+                "taskDescription":params.taskDescription, 
+                "taskStartdate":params.startDate, 
+                "taskEnddate":params.endDate, 
+                "taskStarttime":params.startTime, 
+                "taskEndtime":params.endTime, 
+                "taskNotes":params.taskNotes, 
+                "clientId" :params.clientId,
+                "kidId" :params.kidId
+            });
         };
 
     var queryErrorCallback = function (err) {
@@ -54,7 +72,7 @@ angular.module('SitterAdvantage.taskServices', [])
        console.error(err);
     };
 
-    dbService.executeStatement(query, [params.taskTitle, params.taskDescription, params.startDate, params.endDate, params.startTime, params.endTime, params.taskNotes, params.clientId], querySuccessCallback, queryErrorCallback );
+    dbService.executeStatement(query, [params.taskTitle, params.taskDescription, params.startDate, params.endDate, params.startTime, params.endTime, params.taskNotes, params.clientId,params.kidId], querySuccessCallback, queryErrorCallback );
   }
 
   return {
@@ -78,4 +96,4 @@ angular.module('SitterAdvantage.taskServices', [])
     createNewTask: createNewTask
   };
 
-});
+}); 

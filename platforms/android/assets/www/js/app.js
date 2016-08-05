@@ -82,15 +82,20 @@ angular.module('SitterAdvantage',
     })
   .state('tab.task-detail', {
      url: '/tasks/:taskId',
-    // params: {
-    //   'client_id': '1', 
-    //   'task_id': '1'
-    // },
-
     views: {
       'tab-tasks': {
         templateUrl: 'templates/task-detail.html',
         controller: 'TasksDetailCtrl'
+      }
+    }
+  })
+
+   .state('tab.edit-task-detail', {
+     url: '/tasks/edit-task-detail',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/edit-task-detail.html',
+        controller: 'EditTasksDetailCtrl'
       }
     }
   })

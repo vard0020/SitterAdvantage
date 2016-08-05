@@ -1,19 +1,84 @@
 angular.module('SitterAdvantage.clientControllers', [])
-.controller('ClientsCtrl', ["$scope", "Clients", "$state",
- function($scope, Clients, $state) {
+.controller('ClientsCtrl', ["$scope", "Clients", "$ionicPopup", "$state",
+ function($scope, Clients, $ionicPopup, $state) {
 
   console.log("ClientsCtrl is loaded");
   $scope.clients = [];
   $scope.clients = Clients.all();
   
-  // Nehmat's old code
-  //$scope.clients = Clients.all();
-  // $scope.remove = function(client) {
-  //   Clients.remove(client);
-  // };
-  $scope.addClient = function(){
-    $state.go("tab.new-client");
+  
+   $scope.editClientDescription = function() {
+      // pop up Alert box
+  
+          $scope.data = {};
+
+          var popUp = $ionicPopup.show({
+            template: '<input type="text" ng-model="data.menuItemText"/>',
+            title: 'Edit Client Description',
+            scope: $scope,
+            buttons: [
+            {
+              text: 'Cancel',
+            },
+            {
+              text: '<b>Save</b>',
+              type: 'button-dark',
+              onTap: function (e) {
+                if (!$scope.data.menuItemText) {
+                  //don't allow the user to close untill he added something in input text
+                  e.preventDefault();
+                } else {
+                  return $scope.data.menuItemText;
+                }
+              }
+                
+            },]
+
+        });
+
+        popUp.then(function (res) {
+          if (!res) return;
+          //$scope.saveClientDescription = LocalStorage.addMenuItem(res);
+        });
+   };
+
+    $scope.addClient = function(){
+
+       // pop up Alert box
+          $scope.data = {};
+
+          var popUp = $ionicPopup.show({
+            template: '<input type="text" ng-model="data.menuItemText"/>',
+            title: 'Add Client Description',
+            scope: $scope,
+            buttons: [
+            {
+              text: 'Cancel',
+            },
+            {
+              text: '<b>Save</b>',
+              type: 'button-dark',
+              onTap: function (e) {
+                if (!$scope.data.menuItemText) {
+                  e.preventDefault();
+                } else {
+                  return $scope.data.menuItemText;
+                }
+              }
+                
+            },]
+
+        });
+
+        popUp.then(function (res) {
+          if (!res) return;
+          //$scope.addClientDescription = LocalStorage.addMenuItem(res);
+          $state.go("tab.new-client");
+            
+        });
+    
   };
+
 }])
 
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
@@ -158,7 +223,7 @@ angular.module('SitterAdvantage.clientControllers', [])
 
     };
   $scope.cancelEditedClient = function(){
-    $state.go("tab.clients");
+    $state.go("tab.client-detail");
   };
   
   

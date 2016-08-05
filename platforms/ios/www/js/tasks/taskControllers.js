@@ -3,7 +3,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 .controller('UpcomingTasksCtrl', ["$scope", "Tasks", "$state", 
       function ($scope, Tasks, $state) {
 
-        //alert("hi");
+//        alert("hi");
           console.log("UpcomingTasksCtrl is loaded");
           $scope.tasks = [];
           $scope.tasks = Tasks.all();
@@ -26,7 +26,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 .controller('NewTaskCtrl', ["$scope", "Tasks", "Clients", "$state", "$stateParams","$ionicNavBarDelegate", 
   function ($scope, Tasks, Clients, $state, $stateParams, $ionicNavBarDelegate) {
                             
-      $ionicNavBarDelegate.showBackButton(false);
+      $ionicNavBarDelegate.showBackButton(true);
                         
       console.log("im inside new task controller");
       $scope.cancelNewTask = function () {
@@ -46,8 +46,8 @@ angular.module('SitterAdvantage.taskControllers', [])
       $scope.kidList = []; //[{"kidId":1, "kidName":"Jack"},{"kidId":2, "kidName":"Andrea"},{"kidId":3, "kidName":"Ariana"}];
 
       $scope.newTask = {
-        clientName: "",
-        kidName: "",
+        clientId: "",
+        kidId: "",
         taskTitle: "",
         taskDescription: "",
         startDate: "",
@@ -57,8 +57,17 @@ angular.module('SitterAdvantage.taskControllers', [])
         taskNotes: ""
       };
 
+      $scope.rememberKidId = function(kidId){
+
+        $scope.newTask.kidId=kidId;        
+
+      }
+
       $scope.saveNewTask = function (data) {
         console.dir($scope);
+
+        console.dir($scope.newTask);
+        
 
       Tasks.createNewTask($scope.newTask);
        console.log("inside saveNewTask ");
@@ -79,12 +88,9 @@ angular.module('SitterAdvantage.taskControllers', [])
           }
       }
 
-      
-
-
   }])
 
-.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams","Clients", function ($scope, Tasks,$stateParams,Clients) {
+.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {
   
   console.log("inside task details controller");
 
@@ -94,5 +100,16 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   // $scope.selectedClient = Clients.getById($stateParams.client_id);
   $scope.task = Tasks.get($stateParams.taskId);
+
+  $scope.editTaskDetails = function() {
+    $state.go ("tab.edit-task-detail");
+    
+}
               
-}]);
+}])
+
+.controller('EditTasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {
+
+
+}])
+;
