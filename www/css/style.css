@@ -38,6 +38,7 @@ ion-content div.scroll{
     height: 100%;
 }
 
+<<<<<<< HEAD
 #profile-bg {
         position: fixed;
         left: 0;
@@ -87,3 +88,14 @@ h3 {
 }
 */
      
+=======
+/********************** Padding *******************************/
+
+.my-changes{
+
+text-align: right;
+  
+
+
+}
+>>>>>>> origin/master
