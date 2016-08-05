@@ -4,54 +4,54 @@
         In case of Emergency
     </div>
     <!-- <ion-list> -->
+	  <ion-item>
     <div class="padding">
-        <button class="button button-block icon-left button-assertive" ng-click="callNumber(311)">Call 311</button>
-        <button class="button button-block icon-left ion-location" ng-click="showModal()"> Show My Location </button>
+        <button class="button button-block icon-left button-assertive" ng-click="callNumber(311)">Call 311</button>        
     </div>
+	  <div class="padding">
+	  <button class="button button-block button-balanced icon-left ion-location" ng-click="showModal()"> Show My Location </button>
+	  </div>
+		  </ion-item>
      
          <div class="item item-divider">
             Parent info
             </div>
  <div class="list">
+	 
+	 <!-- ******************************** Parent sub-page ******************************** -->
+			<div id="parent" ng-repeat="parent in selectedClient.parents" class="card">
 
-      <div class="item item-button-right">
-            <h3>John Smith</h3>
-            <span class="ios-blue"> mobile </span>
-            <p> 613-853-9911 </p>
-            
-             <a ng-href="sms:13332221111&body={{ sosMessage }}" class="button button-positive button-clear" id="parent1"> 
-             <!-- ng-click="sendSMS(6138539911)" -->
-              <i id="position" class="icon ion-ios-chatbubble"></i>
-            </a>
-            <button class="button button-positive button-clear" ng-click="callNumber(6138539911)">
-              <i class="icon ion-ios-telephone"></i>
-            </button>
+				<div class="item item-divider item-icon-right">
+					{{parent.parentFirstname + " " + parent.parentLastname}}
+					
+					<div class="icon">
+						<a ng-href="sms:13332221111&body={{ sosMessage }}" class="button button-icon" id="parent1"> 
+							<!-- ng-click="sendSMS(6138539911)" -->
+              				<i id="position" class="icon ion-ios-chatbubble"></i>
+            			</a>
+						
+						<button class="button button-icon" style="padding-left:30px;" ng-click="callNumber(6138539911)">
+							<i class = "icon ion-ios-telephone"></i>
+						</button>
+        			</div>	
+				</div>
+				<div class="item item-text-wrap">
+					<div style="margin-bottom:15px;">
+							<h2>Mobile Number</h2>
+							<hr style="height:1px;margin-top:5px;border:none;color:#333;background-color:#ddd;" />
+							<p>{{parent.parentPrimaryphone}}</p>
+						</div>
+					<div style="margin-bottom:15px;">
+							<h2>Address</h2>
+							<hr style="height:1px;margin-top:5px;border:none;color:#333;background-color:#ddd;" />
+							<p>{{parent.parentStreet}}</p>
+							<p>{{parent.parentCity +", "+ parent.parentState}}</p>
+							<p>{{parent.parentZipcode}}</p>
+						</div>
+				</div>
 
-            <span class="ios-blue"> address </span>
-            <p>213 Portogul Ave.</p>
-            <p>Nepean, ON</p>
-            <p>K2B 8J6</p>
-      </div>
-
-      <div class="item item-button-right">
-            <h3>Carolyn Smith</h3>
-            <span class="ios-blue"> mobile </span>
-            <p>613-853-9911</p>
-            
-             <a href="sms:13332221111&body={{ sosMessage }}" id="parent2" class="button button-positive button-clear"> 
-             <!-- ng-click="sendSMS(6138539911)" -->
-              <i id="position" class="icon ion-ios-chatbubble"></i>
-            </a>
-            <button class="button button-positive button-clear" ng-click="callNumber(6138539911)">
-              <i class="icon ion-ios-telephone"></i>
-            </button>
-
-            <span class="ios-blue"> address </span>
-            <p>213 Portogul Ave.</p>
-            <p>Nepean, ON</p>
-            <p>K2B 8J6</p>
-      </div>    
-                        
+			</div>
+                  
 </div>  
   </ion-content>
 </ion-view>
