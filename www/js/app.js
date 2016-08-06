@@ -6,20 +6,20 @@ angular.module('SitterAdvantage',
                 'SitterAdvantage.emergencyServices', 'SitterAdvantage.resourcesControllers','SitterAdvantage.dbService','ngCordova'])
 
 .run(function(Tasks, Clients, dbService,$ionicPlatform, $cordovaSQLite) {
-	
+  
     $ionicPlatform.ready(function() {
 
-		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                      cordova.plugins.Keyboard.disableScroll(true);
                      
         }
-		
+    
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-		
-		if (window.cordova && window.SQLitePlugin) { // because Cordova is platform specific and doesn't work when you run ionic serve               
+    
+    if (window.cordova && window.SQLitePlugin) { // because Cordova is platform specific and doesn't work when you run ionic serve               
             db = window.sqlitePlugin.openDatabase({ "name": "sitter.db" }); //device - SQLite
             //alert("device db (SQLite) loaded");
         } else {
@@ -27,146 +27,146 @@ angular.module('SitterAdvantage',
             db = window.openDatabase("APSNetMobileDb", "1.0", "sitter.db", 100 * 1024 * 1024); // browser webSql, a fall-back for debugging
             //alert("browser db (WebSQL) loaded");
         }
-		        
-		if (db) {
-			
-			console.log("db should have been opened at this step");
+            
+    if (db) {
+      
+      console.log("db should have been opened at this step");
             dbService.createTables();
             dbService.insertTestData();
             Tasks.loadFromDB();
             Clients.loadFromDB();
-		}
+    }
     });
 })
 
 
 .config(function ($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
 
-	//inappbrowser to allow loading the website pages within the resource tab
-	// var defaultOptions = {
-	//   location: 'no',
-	//   clearcache: 'no',
-	//   toolbar: 'yes'
-	// };
+  //inappbrowser to allow loading the website pages within the resource tab
+  // var defaultOptions = {
+  //   location: 'no',
+  //   clearcache: 'no',
+  //   toolbar: 'yes'
+  // };
 
-	// $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
+  // $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
 
-	//using state provider to route the different pages in the app
-	$stateProvider
+  //using state provider to route the different pages in the app
+  $stateProvider
 
-	// setup an abstract state for the tabs directive
-		.state('tab', {
-		url: '/tab',
-		abstract: true,
-		templateUrl: 'templates/tabs.html'
-	})
+  // setup an abstract state for the tabs directive
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
 
-	// Each tab has its own nav history stack:
+  // Each tab has its own nav history stack:
 
-	.state('tab.tasks', {
-			url: '/tasks',
-			views: {
-				'tab-tasks': {
-					templateUrl: 'templates/tab-tasks.html',
-					controller: 'UpcomingTasksCtrl'
-				}
-			}
-		})
-		.state('tab.new-task', {
-			url: '/newTask',
-			views: {
-				'tab-tasks': {
-					templateUrl: 'templates/new-task.html',
-					controller: 'NewTaskCtrl'
-				}
-			}
-		})
-		.state('tab.task-detail', {
-			url: '/tasks/:taskId',
-			views: {
-				'tab-tasks': {
-					templateUrl: 'templates/task-detail.html',
-					controller: 'TasksDetailCtrl'
-				}
-			}
-		})
+  .state('tab.tasks', {
+      url: '/tasks',
+      views: {
+        'tab-tasks': {
+          templateUrl: 'templates/tab-tasks.html',
+          controller: 'UpcomingTasksCtrl'
+        }
+      }
+    })
+    .state('tab.new-task', {
+      url: '/newTask',
+      views: {
+        'tab-tasks': {
+          templateUrl: 'templates/new-task.html',
+          controller: 'NewTaskCtrl'
+        }
+      }
+    })
+    .state('tab.task-detail', {
+      url: '/tasks/:taskId',
+      views: {
+        'tab-tasks': {
+          templateUrl: 'templates/task-detail.html',
+          controller: 'TasksDetailCtrl'
+        }
+      }
+    })
 
-	.state('tab.edit-task-detail', {
-		url: '/tasks/edit-task-detail',
-		views: {
-			'tab-tasks': {
-				templateUrl: 'templates/edit-task-detail.html',
-				controller: 'EditTasksDetailCtrl'
-			}
-		}
-	})
+  .state('tab.edit-task-detail', {
+    url: '/tasks/edit-task-detail',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/edit-task-detail.html',
+        controller: 'EditTasksDetailCtrl'
+      }
+    }
+  })
 
-	.state('tab.clients', {
-			url: '/clients',
-			views: {
-				'tab-clients': {
-					templateUrl: 'templates/tab-clients.html',
-					controller: 'ClientsCtrl'
-				}
-			}
-		})
-		.state('tab.client-detail', {
-			url: '/clients/:clientId',
-			views: {
-				'tab-clients': {
-					templateUrl: 'templates/client-detail.html',
-					controller: 'ClientDetailCtrl'
-				}
-			}
-		})
-		.state('tab.new-client', {
-			url: '/newClient',
-			views: {
-				'tab-clients': {
-					templateUrl: 'templates/new-client.html',
-					controller: 'NewClientCtrl'
-				}
-			}
-		})
-		.state('tab.edit-client', {
-			url: '/editClient/:clientId',
-			views: {
-				'tab-clients': {
-					templateUrl: 'templates/edit-client.html',
-					controller: 'EditClientCtrl'
-				}
-			}
-		})
+  .state('tab.clients', {
+      url: '/clients',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/tab-clients.html',
+          controller: 'ClientsCtrl'
+        }
+      }
+    })
+    .state('tab.client-detail', {
+      url: '/clients/:clientId',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/client-detail.html',
+          controller: 'ClientDetailCtrl'
+        }
+      }
+    })
+    .state('tab.new-client', {
+      url: '/newClient',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/new-client.html',
+          controller: 'NewClientCtrl'
+        }
+      }
+    })
+    .state('tab.edit-client', {
+      url: '/editClient/:clientId',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/edit-client.html',
+          controller: 'EditClientCtrl'
+        }
+      }
+    })
 
-	.state('tab.emergency', {
-			url: '/emergency',
-			views: {
-				'tab-emergency': {
-					templateUrl: 'templates/tab-emergency.html',
-					controller: 'EmergencyCtrl'
-				}
-			}
-		})
-		.state('tab.resources', {
-			url: '/resources',
-			views: {
-				'tab-resources': {
-					templateUrl: 'templates/tab-resources.html',
-					controller: 'ResourcesCtrl'
-				}
-			}
-		})
-		.state('tab.resources-detail', {
-			url: '/resources/resourcesId',
-			views: {
-				'tab-resources': {
-					templateUrl: 'templates/checklist.html',
-					controller: 'ResourcesCtrl'
-				}
-			}
-		});
+  .state('tab.emergency', {
+      url: '/emergency',
+      views: {
+        'tab-emergency': {
+          templateUrl: 'templates/tab-emergency.html',
+          controller: 'EmergencyCtrl'
+        }
+      }
+    })
+    .state('tab.resources', {
+      url: '/resources',
+      views: {
+        'tab-resources': {
+          templateUrl: 'templates/tab-resources.html',
+          controller: 'ResourcesCtrl'
+        }
+      }
+    })
+    .state('tab.resources-detail', {
+      url: '/resources/resourcesId',
+      views: {
+        'tab-resources': {
+          templateUrl: 'templates/checklist.html',
+          controller: 'ResourcesCtrl'
+        }
+      }
+    });
 
-	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/tab/tasks');
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/tab/tasks');
 
 });
