@@ -3,8 +3,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 .controller('UpcomingTasksCtrl', ["$scope", "Tasks", "$state", 
       function ($scope, Tasks, $state) {
 
-//        alert("hi");
-          console.log("UpcomingTasksCtrl is loaded");
+		  console.log("UpcomingTasksCtrl is loaded");
           $scope.tasks = [];
           $scope.tasks = Tasks.all();
           $scope.addTask = function(){
