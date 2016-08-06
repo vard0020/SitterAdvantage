@@ -1,14 +1,25 @@
-<ion-view view-title="Resources"cache-view ="false">
-  <ion-content class = "padding">
-    <ion-list class="item-icon-right">
-      <ion-item type="item-text-wrap" href="#/tab/resources/resourcesId">
-        <h2>Job Checklist</h2>
-        <i class="icon ion-chevron-right icon-accessory"></i>
-      </ion-item> 
-  		<ion-item type="item-text-wrap" ng-repeat="resource in resources" ng-click="openWebsite($index)">
-	      <h2>{{ resource.title }}</h2>
-	      <i class="icon ion-chevron-right icon-accessory"></i>
-  		</ion-item> 
-	</ion-list>
-  </ion-content>
+<ion-view view-title="Resources" cache-view="false">
+	<ion-content>
+		<ion-list class="item-icon-right">
+			<div class="item item-divider">
+				Checklists
+			</div>
+			<ion-item type="item-text-wrap" href="#/tab/resources/resourcesId">
+				<h2>Job Checklist</h2>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</ion-item>
+			<ion-item type="item-text-wrap" href="#">
+				<h2>Other Checklist</h2>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</ion-item>
+			<div class="item item-divider">
+				External Resources
+			</div>
+			<ion-item type="item-text-wrap" ng-repeat="resource in resources" ng-click="openWebsite($index)">
+				<h2>{{ resource.title }}</h2>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</ion-item>
+
+		</ion-list>
+	</ion-content>
 </ion-view>

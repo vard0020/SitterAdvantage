@@ -11,6 +11,10 @@
                         {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -19,6 +23,9 @@
     },
     "installed_plugins": {
         "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.CodeBlue.SitterAdvantage"
+        },
+        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.CodeBlue.SitterAdvantage"
         }
     },

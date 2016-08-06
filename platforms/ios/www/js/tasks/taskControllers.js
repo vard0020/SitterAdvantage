@@ -26,7 +26,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 .controller('NewTaskCtrl', ["$scope", "Tasks", "Clients", "$state", "$stateParams","$ionicNavBarDelegate", 
   function ($scope, Tasks, Clients, $state, $stateParams, $ionicNavBarDelegate) {
                             
-      $ionicNavBarDelegate.showBackButton(true);
+      //$ionicNavBarDelegate.showBackButton(true);
                         
       console.log("im inside new task controller");
       $scope.cancelNewTask = function () {
@@ -94,18 +94,18 @@ angular.module('SitterAdvantage.taskControllers', [])
   
   console.log("inside task details controller");
 
- // alert('hi');
-
-  console.log($stateParams.taskId);
-
-  // $scope.selectedClient = Clients.getById($stateParams.client_id);
   $scope.task = Tasks.get($stateParams.taskId);
 
-  $scope.editTaskDetails = function() {
-    $state.go ("tab.edit-task-detail");
-    
-}
-              
+  $scope.editTaskDetails = function(e) {
+    $scope.disableEnableForm = function(e){ return true;} 
+    $scope.toggleVisibility = true;
+  }
+
+  $scope.saveTaskDetails = function(){
+    $scope.disableEnableForm = function(e){ return false;} 
+    $scope.toggleVisibility = false;
+  }
+            
 }])
 
 .controller('EditTasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {

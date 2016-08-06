@@ -14,10 +14,6 @@ angular.module('SitterAdvantage.resourcesControllers', [])
 			{
 				"title": "Crafts",
 				"url": "http://www.whattodowiththekids.com/crafts/"
-			},
-			{
-				"title": "Disney",
-				"url": "http://disney.com/"
 			}
 		]
 		$scope.openWebsite = function(index){

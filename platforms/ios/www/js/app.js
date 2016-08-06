@@ -21,13 +21,15 @@ angular.module('SitterAdvantage',
     }
                        
   if (ionic.Platform.isWebView()) {
-      db = window.sqlitePlugin.openDatabase({ name: "my2.db", iosDatabaseLocation: 'default'}); //device
+                       
+      db = window.sqlitePlugin.openDatabase({ name: "sitter.db", iosDatabaseLocation: 'default'}); //device
                        
    // db = window.sqlitePlugin.openDatabase({name: "my.db", location: 2, createFromLocation: 1});
    }else{
      db = window.openDatabase("sitter.db", '1', 'Sitter Database', 1024 * 1024 * 10); // browser
   }
 
+ alert("hi");
   if (db) {
     console.log("db should have been opened at this step");
     dbService.createTables();

@@ -89,7 +89,7 @@ angular.module('SitterAdvantage.clientControllers', [])
   /*This delegate code is used to decide when to have the back button automatic functionality
   created by ionic. For example in client detail controller i set it to true because i want it
   while in other pages we have cancelled it byt setting it to false.*/
-  $ionicNavBarDelegate.showBackButton(true);
+  //$ionicNavBarDelegate.showBackButton(true);
   
   //used stateParams to access clientId which allows us to navigate to each client's detail page.
   $scope.selectedClient = Clients.getById($stateParams.clientId);
@@ -111,7 +111,7 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 .controller('NewClientCtrl',["$scope", "$state","Clients", "$ionicNavBarDelegate", "$cordovaCamera",
  function($scope, $state, Clients, $ionicNavBarDelegate, $cordovaCamera) {
-  $ionicNavBarDelegate.showBackButton(false);
+  //$ionicNavBarDelegate.showBackButton(false);
    $scope.selectedIndex = 0;
    $scope.buttonClicked = function(index){
       $scope.selectedIndex = index;

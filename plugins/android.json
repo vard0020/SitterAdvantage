@@ -4,10 +4,24 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.sqlc.SQLitePlugin\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.CodeBlue.SitterAdvantage"
+        },
+        "cordova-sqlite-storage": {
             "PACKAGE_NAME": "com.CodeBlue.SitterAdvantage"
         }
     },

@@ -1,13 +1,16 @@
 
 angular.module('SitterAdvantage.emergencyControllers', ['ngCordova'])
 ////////////////// Anna's code //////////////////
-.controller('EmergencyCtrl', ["$scope", "$ionicModal", "$cordovaSms",  "GPSMap", function ($scope, $ionicModal, $cordovaSms, GPSMap) {
+.controller('EmergencyCtrl', ["$scope", "$ionicModal", "$cordovaSms",  "GPSMap","Clients", function ($scope, $ionicModal, $cordovaSms, GPSMap,Clients) {
   console.log("entering emergency");
   $scope.sosMessage = "I am in trouble! Come home now!\n";
 
   $scope.settings = {
     enableFriends: true
   };
+	
+
+ $scope.selectedClient = Clients.getById(1);
   
   var showGPS = "Show my location"; 
   var hideGPS = "Hide Map"; 
