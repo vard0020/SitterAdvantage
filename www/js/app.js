@@ -9,10 +9,79 @@ angular.module('SitterAdvantage',
 	
     $ionicPlatform.ready(function() {
 
+<<<<<<< Updated upstream
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                      cordova.plugins.Keyboard.disableScroll(true);
                      
+=======
+.config(function($stateProvider, $urlRouterProvider, $cordovaInAppBrowserProvider) {
+   
+//inappbrowser to allow loading the website pages within the resource tab
+  // var defaultOptions = {
+  //   location: 'no',
+  //   clearcache: 'no',
+  //   toolbar: 'yes'
+  // };
+
+  // $cordovaInAppBrowserProvider.setDefaultOptions(defaultOptions);
+
+  //using state provider to route the different pages in the app
+  $stateProvider
+
+  // setup an abstract state for the tabs directive
+    .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html'
+  })
+
+  // Each tab has its own nav history stack:
+
+  .state('tab.tasks', {
+    url: '/tasks',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/tab-tasks.html',
+        controller: 'UpcomingTasksCtrl'
+      }
+    }
+  })
+   .state('tab.new-task', {
+      url: '/newTask',
+      views: {
+        'tab-tasks': {
+          templateUrl: 'templates/new-task.html',
+            controller: 'NewTaskCtrl'
+        }
+      }
+    })
+  .state('tab.task-detail', {
+     url: '/tasks/:taskId',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/task-detail.html',
+        controller: 'TasksDetailCtrl'
+      }
+    }
+  })
+
+  .state('tab.clients', {
+      url: '/clients',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/tab-clients.html',
+          controller: 'ClientsCtrl'
+        }
+      }
+    })
+    .state('tab.client-detail', {
+      url: '/clients/:clientId',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/client-detail.html',
+          controller: 'ClientDetailCtrl'
+>>>>>>> Stashed changes
         }
 		
         if(window.StatusBar) {

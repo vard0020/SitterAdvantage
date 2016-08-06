@@ -1,7 +1,12 @@
 <ion-view view-title="Task Details">
   <ion-nav-buttons side="secondary">
     <button class="button correctSize" ng-click="editTaskDetails()" ng-hide="toggleVisibility">Edit</button>
-    <button class="button correctSize" ng-click="saveTaskDetails()" ng-show="toggleVisibility">Save</button>
+    <button class="button correctSize" ng-click="saveTaskDetails()" ng-hide="!toggleVisibility">Save</button>
+
+  </ion-nav-buttons>
+  <ion-nav-buttons side="primary">
+    <button class="button correctSize secondary" ng-click="cancelTaskDetails()" ng-hide="!toggleVisibility">Cancel</button>
+
   </ion-nav-buttons>
   <ion-content>
     <!-- ******************************** Task sub-page ******************************** -->
@@ -10,10 +15,7 @@
       <div class="item item-text-wrap">
 
         <div style="margin-bottom:15px;">
-          <h2>Task Title</h2>
-          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
-
-          <input ng-disabled="!disableEnableForm()" class="item-input textDisable" type="text" placeholder="Task Title" value="{{task.taskTitle}}">
+          <input style="font-weight:600;" ng-disabled="!disableEnableForm()" class="item-input textDisable ios-blue" type="text" placeholder="Task Title" value="{{task.taskTitle}}">
         </div>
 
         <div style="margin-bottom:15px;">
