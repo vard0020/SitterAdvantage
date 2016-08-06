@@ -88,7 +88,6 @@ h3 {
 }
 */
      
-=======
 /********************** Padding *******************************/
 /*
 input:disabled {
@@ -104,11 +103,7 @@ background-color: #a2ddf4;
 */
 
 .textDisable {
-  background-color: red;
-  padding: 7px 13px;
-  color: white;
-  border: 1px solid red;
-  font-weight: bold;
+  background-color: #fff;
 }
 .textDisable[disabled] {
   background-color: #fff;
@@ -117,8 +112,4 @@ background-color: #a2ddf4;
 .my-changes{
 
 text-align: right;
-  
-
-
-}
->>>>>>> origin/master
+  }

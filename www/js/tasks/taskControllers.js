@@ -95,14 +95,19 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   $scope.task = Tasks.get($stateParams.taskId);
 
+$scope.disableEnableForm = false
+	
   $scope.editTaskDetails = function(e) {
-    $scope.disableEnableForm = function(e){ return true;} 
+    //$scope.disableEnableForm = function(e){ return true;} 
+	$scope.disableEnableForm = true;
+	
     $scope.toggleVisibility = true;
     $ionicNavBarDelegate.showBackButton(false);
   }
 
   $scope.saveTaskDetails = function(){
-    $scope.disableEnableForm = function(e){ return false;} 
+    //$scope.disableEnableForm = function(e){ return false;} 
+	$scope.disableEnableForm = false;
     $scope.toggleVisibility = false;
         $ionicNavBarDelegate.showBackButton(true);
 
