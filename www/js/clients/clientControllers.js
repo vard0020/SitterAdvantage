@@ -84,12 +84,28 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
  function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
 
+  //handler for editing parent information
+  $scope.editParent = function(){
+    $scope.selectedParent = {};
+    $scope.selectedParent = Clients.getById($stateParams.parentId);
+    $state.go("tab.edit-parent", { parentId: $stateParams.parentId } );
+  }
+
+  //handler for editing kid information
+  $scope.editKid = function(){
+    $scope.selectedKid = {};
+    $scope.selectedKid = Clients.getById($stateParams.kidId);
+    $state.go("tab.edit-kid", { kidId: $stateParams.kidId } );
+    
+  }
+
+  //handler for editing task information
+  $scope.editTask = function(){
+    $state.go("tab.task-detail");
+  }
+
+
   $scope.selectedClient = {};
-  
-  /*This delegate code is used to decide when to have the back button automatic functionality
-  created by ionic. For example in client detail controller i set it to true because i want it
-  while in other pages we have cancelled it byt setting it to false.*/
-  //$ionicNavBarDelegate.showBackButton(true);
   
   //used stateParams to access clientId which allows us to navigate to each client's detail page.
   $scope.selectedClient = Clients.getById($stateParams.clientId);
@@ -108,6 +124,48 @@ angular.module('SitterAdvantage.clientControllers', [])
    }
 
 }])
+
+.controller('EditParentCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
+
+  $ionicNavBarDelegate.showBackButton(false);
+
+  $scope.saveParent = function(){
+      $state.go("tab.client-detail");
+  }
+
+  $scope.cancelParent = function(){
+        
+        $state.go("tab.client-detail");
+        $ionicNavBarDelegate.showBackButton(true);
+
+      }
+
+  $scope.deleteParent = function(){
+      alert("deleted");
+  }
+
+}])
+
+.controller('EditKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
+
+ 
+
+}])
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .controller('NewClientCtrl',["$scope", "$state","Clients", "$ionicNavBarDelegate", "$cordovaCamera",
  function($scope, $state, Clients, $ionicNavBarDelegate, $cordovaCamera) {

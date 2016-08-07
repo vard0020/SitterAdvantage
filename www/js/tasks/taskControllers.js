@@ -1,9 +1,9 @@
 angular.module('SitterAdvantage.taskControllers', [])
 
-.controller('UpcomingTasksCtrl', ["$scope", "Tasks", "$state", 
+.controller('TaskCtrl', ["$scope", "Tasks", "$state", 
       function ($scope, Tasks, $state) {
 
-		  console.log("UpcomingTasksCtrl is loaded");
+		  console.log("TaskCtrl is loaded");
           $scope.tasks = [];
           $scope.tasks = Tasks.all();
           $scope.addTask = function(){
@@ -15,9 +15,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 
             var item = $scope.tasks[$index];
 
-              // var param = { client_id:item.clientId, task_id:item.taskId};
-
-              $state.go('tab.task-detail' +item.taskId);
+              $state.go('tab.task-detail' + item.taskId);
               
             }
       }])
@@ -116,6 +114,8 @@ $scope.disableEnableForm = false
   $scope.cancelTaskDetails = function(){
     $scope.toggleVisibility = false;
         $ionicNavBarDelegate.showBackButton(true);
+          $scope.disableEnableForm = false;
+
 
   }
             

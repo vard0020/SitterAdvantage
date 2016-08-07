@@ -68,7 +68,7 @@ angular.module('SitterAdvantage',
       views: {
         'tab-tasks': {
           templateUrl: 'templates/tab-tasks.html',
-          controller: 'UpcomingTasksCtrl'
+          controller: 'TaskCtrl'
         }
       }
     })
@@ -90,16 +90,6 @@ angular.module('SitterAdvantage',
         }
       }
     })
-
-  .state('tab.edit-task-detail', {
-    url: '/tasks/edit-task-detail',
-    views: {
-      'tab-tasks': {
-        templateUrl: 'templates/edit-task-detail.html',
-        controller: 'EditTasksDetailCtrl'
-      }
-    }
-  })
 
   .state('tab.clients', {
       url: '/clients',
@@ -134,6 +124,26 @@ angular.module('SitterAdvantage',
         'tab-clients': {
           templateUrl: 'templates/edit-client.html',
           controller: 'EditClientCtrl'
+        }
+      }
+    })
+
+    .state('tab.edit-parent', {
+      url: '/editParent/:parentId',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/edit-parent.html',
+          controller: 'EditParentCtrl'
+        }
+      }
+    })
+
+     .state('tab.edit-kid', {
+      url: '/editKid/:kidId',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/edit-kid.html',
+          controller: 'EditKidCtrl'
         }
       }
     })
