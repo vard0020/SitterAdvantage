@@ -121,8 +121,4 @@ $scope.disableEnableForm = false
             
 }])
 
-.controller('EditTasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "Clients", function ($scope, Tasks,$stateParams, $state, Clients) {
-
-
-}])
 ;

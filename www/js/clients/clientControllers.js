@@ -81,8 +81,8 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('ClientDetailCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
- function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
+.controller('ClientDetailCtrl',["$scope", "$stateParams", "$rootScope", "Clients", "$ionicNavBarDelegate", "$state",
+ function($scope, $stateParams, $rootScope,Clients, $ionicNavBarDelegate, $state) {
 
   //handler for editing parent information
   $scope.editParent = function(){
@@ -96,12 +96,24 @@ angular.module('SitterAdvantage.clientControllers', [])
     $scope.selectedKid = {};
     $scope.selectedKid = Clients.getById($stateParams.kidId);
     $state.go("tab.edit-kid", { kidId: $stateParams.kidId } );
+    $ionicNavBarDelegate.showBackButton(false);
+
     
   }
 
   //handler for editing task information
   $scope.editTask = function(){
     $state.go("tab.task-detail");
+      $scope.disableEnableForm = true;
+
+    //we need to 
+    //1. change page title
+    //2. hde edit button
+    //3. show cancel button
+    //hide disabling
+    //show delete button
+
+
   }
 
 
@@ -147,29 +159,56 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('EditKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
- function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
+.controller('EditKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicActionSheet",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicActionSheet) {
 
- 
+  $scope.saveKid = function(){
+      $state.go("tab.client-detail");
+     //Note: after going to client-details we should land on kid segmented control, (ng-switch when =1 ) instead of parent
+  }
+
+  $scope.cancelKid= function(){
+        
+        $state.go("tab.client-detail");
+        $ionicNavBarDelegate.showBackButton(true);
+        //Note: after going to client-details we should land on kid segmented control, (ng-switch when = 2)instead of parent
+      }
+
+  $scope.deleteKid = function(){
+      alert("deleted");
+      $state.go("tab.client-detail");
+       //Note: after going to client-details we should land on kid segmented control, (ng-switch when = 2)instead of parent
+  }
+
+  $scope.editKidPicture = function(){
+    // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+      buttons: [
+       { text: 'Take Photo' },
+      ],
+     destructiveText: 'Delete Photo',
+     cancelText: 'Cancel',
+
+     cancel: function() {
+          hideSheet();
+      },
+     buttonClicked: function(index) {
+       //code for taking a new photo
+       return true;
+     },
+
+     destructiveButtonClicked: function(){
+       hideSheet();
+     }
+     
+   });
+      
+  }
 
 }])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .controller('NewClientCtrl',["$scope", "$state","Clients", "$ionicNavBarDelegate", "$cordovaCamera",
  function($scope, $state, Clients, $ionicNavBarDelegate, $cordovaCamera) {
-  //$ionicNavBarDelegate.showBackButton(false);
    $scope.selectedIndex = 0;
    $scope.buttonClicked = function(index){
       $scope.selectedIndex = index;

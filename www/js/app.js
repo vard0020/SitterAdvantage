@@ -86,7 +86,8 @@ angular.module('SitterAdvantage',
       views: {
         'tab-tasks': {
           templateUrl: 'templates/task-detail.html',
-          controller: 'TasksDetailCtrl'
+          controller: 'TasksDetailCtrl',
+          title: 'Task Details'
         }
       }
     })
