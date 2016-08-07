@@ -72,11 +72,9 @@ angular.module('SitterAdvantage.clientControllers', [])
 
         popUp.then(function (res) {
           if (!res) return;
-          //$scope.addClientDescription = LocalStorage.addMenuItem(res);
           $state.go("tab.new-client");
             
         });
-    
   };
 
 }])
@@ -97,14 +95,21 @@ angular.module('SitterAdvantage.clientControllers', [])
     $scope.selectedKid = Clients.getById($stateParams.kidId);
     $state.go("tab.edit-kid", { kidId: $stateParams.kidId } );
     $ionicNavBarDelegate.showBackButton(false);
-
-    
+  
   }
 
   //handler for editing task information
   $scope.editTask = function(){
     $state.go("tab.task-detail");
-      $scope.disableEnableForm = true;
+    $rootScope.previousState;
+    $rootScope.currentState;
+    
+    $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+      $rootScope.previousState = from.name;
+      $rootScope.currentState = to.name;
+      console.log('Previous state:'+$rootScope.previousState);
+      console.log('Current state:'+$rootScope.currentState);
+    });
 
     //we need to 
     //1. change page title

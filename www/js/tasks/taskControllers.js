@@ -85,8 +85,17 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   }])
 
-.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "$ionicNavBarDelegate", "Clients", function ($scope, Tasks,$stateParams, $state, $ionicNavBarDelegate, Clients) {
+.controller('TasksDetailCtrl', ["$scope", "Tasks","$stateParams", "$state", "$rootScope", "$ionicNavBarDelegate", "Clients", function ($scope, Tasks,$stateParams, $state, $rootScope, $ionicNavBarDelegate, Clients) {
 
+    $rootScope.previousState;
+    $rootScope.currentState;
+    
+    $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
+      $rootScope.previousState = from.name;
+      $rootScope.currentState = to.name;
+      console.log('Previous state:'+$rootScope.previousState);
+      console.log('Current state:'+$rootScope.currentState);
+    });
 
   
   console.log("inside task details controller");
@@ -115,6 +124,10 @@ $scope.disableEnableForm = false
     $scope.toggleVisibility = false;
         $ionicNavBarDelegate.showBackButton(true);
           $scope.disableEnableForm = false;
+
+  }
+
+  $scope.editTask = function(){
 
 
   }
