@@ -29,7 +29,7 @@ angular.module('SitterAdvantage',
      db = window.openDatabase("sitter.db", '1', 'Sitter Database', 1024 * 1024 * 10); // browser
   }
 
- alert("hi");
+                       //alert("hi");
   if (db) {
     console.log("db should have been opened at this step");
     dbService.createTables();
