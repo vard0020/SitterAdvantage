@@ -98,16 +98,6 @@ angular.module('SitterAdvantage.taskControllers', [])
 
 	$scope.task = Tasks.get($stateParams.taskId);
 	
-//	// Assign to scope var
-//	$scope.taskTitle=  $scope.task.taskTitle;
-//	$scope.taskDescription= $scope.task.taskDescription;
-//	$scope.taskStartdate= $scope.task.taskStartdate;
-//	$scope.taskEnddate= $scope.task.taskEnddate;
-//	$scope.taskStarttime= $scope.task.taskStarttime;
-//	$scope.taskEndtime= $scope.task.taskEndtime;
-//	$scope.taskNotes= $scope.task.taskNotes;
-	//$scope.taskNotes= $scope.task.taskNotes;
-
 	$scope.disableEnableForm = false
 
 	$scope.editTaskDetails = function (e) {
@@ -148,10 +138,14 @@ angular.module('SitterAdvantage.taskControllers', [])
 		$scope.disableEnableForm = false;
 	}
 
+	$scope.deleteTaskDetails = function () {
+		//Delete task
+		Tasks.deleteTask($scope.task.taskId);
+		$state.go("tab.tasks");
+	}
+	
 	$scope.editTask = function () {
 
 	}
 
-}])
-
-;
+}]);

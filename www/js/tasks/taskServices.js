@@ -111,12 +111,31 @@ angular.module('SitterAdvantage.taskServices', [])
         };
 
     var queryErrorCallback = function (err) {
-       console.log("insert statement for tasks failed");
+       console.log("update statement for tasks failed");
        console.error(err);
     };
 
     dbService.executeStatement(query, [params.taskTitle, params.taskDescription, params.startDate, params.endDate, params.startTime, params.endTime, params.taskNotes, params.clientId,params.taskId], querySuccessCallback, queryErrorCallback );
   }
+  
+  /*---------------------------------------------------------------
+  ____________________Delete task ____________________________
+  ---------------------------------------------------------------*/
+   var deleteTask = function(taskId) {
+	   
+    var query = "DELETE FROM tasks where taskId = ?";
+    var querySuccessCallback = function(tx, res) {
+        console.log("delete task succeeded");
+        console.log(res);     
+    };
+
+	 var queryErrorCallback = function (err) {
+       console.log("delete task failed");
+       console.error(err);
+    };
+	   
+    dbService.executeStatement(query,[taskId], querySuccessCallback, queryErrorCallback );
+  };
 
   return {
     loadFromDB: loadFromDB,
@@ -137,7 +156,8 @@ angular.module('SitterAdvantage.taskServices', [])
       return null;
     },
     createNewTask: createNewTask,
-	updateTask: updateTask
+	updateTask: updateTask,
+	deleteTask: deleteTask
   };
 
 }); 
