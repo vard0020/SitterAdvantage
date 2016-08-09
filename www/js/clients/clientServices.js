@@ -1,6 +1,6 @@
 angular.module('SitterAdvantage.clientServices', [])
 
-.factory('Clients', ['dbService',function(dbService) {
+.factory('Clients', ['dbService','$q',function(dbService,$q) {
   var clients = [];
   var selectedClient = {}; 
   var newClient = {};
@@ -133,59 +133,80 @@ angular.module('SitterAdvantage.clientServices', [])
       addNewClient([newClient.clientDesc]);
   };
 
-  //Save data for each new client including kid, parent and tasks */
+//Save data for each new client including kid, parent and tasks */
   var addNewClient = function(params) {
-    var query = "INSERT INTO clients (clientDesc) VALUES (?)";
-    var querySuccessCallback = function(tx, res) {
+
+    var d = $q.defer();
+
+   var query = "INSERT INTO clients (clientDesc) VALUES (?)"; 
+   var querySuccessCallback = function(tx, res) {
         console.log("insert statement for adding a newClient succeeded");
         console.log(res);  
         console.log(res.insertId);   
+
+         d.resolve(res.insertId);
         // get client id for new client after adding it.
-        clientId = res.insertId; 
-        //After getting client id, now i can add parent, kid, task info
-      addParentInNewClient(
-        [
-          newClient.parents.parentFirstname,
-          newClient.parents.parentLastname,
-          newClient.parents.parentNotes,
-          newClient.parents.parentStreet,
-          newClient.parents.parentUnit,
-          newClient.parents.parentCity,
-          newClient.parents.parentState,
-          newClient.parents.parentZipcode,
-          newClient.parents.parentPrimaryphone,
-          newClient.parents.parentSecondaryphone,
-          newClient.parents.parentEmailid,
-          clientId
-        ]);
+        //return res.insertId; // return client id 
+      }
 
-      addkidInNewClient(
-        [
-          newClient.kids.kidFirstname,
-          newClient.kids.kidLastname,
-          newClient.kids.kidBirthdate,
-          newClient.kids.kidGender,
-          newClient.kids.kidNotes,
-          newClient.kids.kidPicture,
-          clientId
-        ]);
+   dbService.executeStatement(query,[params], querySuccessCallback, queryErrorCallback );
 
-      addTaskInNewClient(
-        [
-        newClient.tasks.taskTitle,
-        newClient.tasks.taskDescription,
-        newClient.tasks.taskStartdate,
-        newClient.tasks.taskEnddate,
-        newClient.tasks.taskStarttime,
-        newClient.tasks.taskEndtime,
-        newClient.tasks.taskNotes,
-        clientId
-        ]);
+    return d.promise;
+  }
 
-      newClient.id = clientId;
-    };
-    dbService.executeStatement(query,params, querySuccessCallback, queryErrorCallback );
-  };
+  // //Save data for each new client including kid, parent and tasks */
+  // var addNewClient = function(params) {
+  //   var query = "INSERT INTO clients (clientDesc) VALUES (?)";
+  //   var querySuccessCallback = function(tx, res) {
+  //       console.log("insert statement for adding a newClient succeeded");
+  //       console.log(res);  
+  //       console.log(res.insertId);   
+  //       // get client id for new client after adding it.
+  //       clientId = res.insertId; 
+  //       //After getting client id, now i can add parent, kid, task info
+  //     addParentInNewClient(
+  //       [
+  //         newClient.parents.parentFirstname,
+  //         newClient.parents.parentLastname,
+  //         newClient.parents.parentNotes,
+  //         newClient.parents.parentStreet,
+  //         newClient.parents.parentUnit,
+  //         newClient.parents.parentCity,
+  //         newClient.parents.parentState,
+  //         newClient.parents.parentZipcode,
+  //         newClient.parents.parentPrimaryphone,
+  //         newClient.parents.parentSecondaryphone,
+  //         newClient.parents.parentEmailid,
+  //         clientId
+  //       ]);
+
+  //     addkidInNewClient(
+  //       [
+  //         newClient.kids.kidFirstname,
+  //         newClient.kids.kidLastname,
+  //         newClient.kids.kidBirthdate,
+  //         newClient.kids.kidGender,
+  //         newClient.kids.kidNotes,
+  //         newClient.kids.kidPicture,
+  //         clientId
+  //       ]);
+
+  //     addTaskInNewClient(
+  //       [
+  //       newClient.tasks.taskTitle,
+  //       newClient.tasks.taskDescription,
+  //       newClient.tasks.taskStartdate,
+  //       newClient.tasks.taskEnddate,
+  //       newClient.tasks.taskStarttime,
+  //       newClient.tasks.taskEndtime,
+  //       newClient.tasks.taskNotes,
+  //       clientId
+  //       ]);
+
+  //     newClient.id = clientId;
+  //   };
+  //   dbService.executeStatement(query,params, querySuccessCallback, queryErrorCallback );
+  // };
 
   var addParentInNewClient = function(params) {
     var query = "INSERT INTO parents (parentFirstname, parentLastname, parentNotes, parentStreet, parentUnit, parentCity, parentState, parentZipcode, parentPrimaryphone, parentSecondaryphone, parentEmailid, clientId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -402,7 +423,8 @@ angular.module('SitterAdvantage.clientServices', [])
       return true;
     },
     createNewClient: createNewClient,
-    editClient: editClient
+    editClient: editClient,
+    addNewClient: addNewClient
 
   };
 }]);

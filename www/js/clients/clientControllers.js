@@ -72,9 +72,29 @@ angular.module('SitterAdvantage.clientControllers', [])
 
         popUp.then(function (res) {
           if (!res) return;
-          $state.go("tab.new-client");
+
+          $scope.insertClient(res);          
             
         });
+  };
+
+  $scope.insertClient = function(clientDesc){
+
+    // Insert client in database
+    Clients.addNewClient(clientDesc).then(function (clientId) {
+          if (!clientId) return;
+          console.log(clientId)
+
+          
+          $state.go("tab.client-detail",{clientId : clientId});
+            //$state.go("#/tab/clients/"+clientId);
+        },function(error){ //"error" --> deferred.reject(err);
+
+        console.log(error)
+        //error code
+      });
+    
+
   };
 
 }])
@@ -82,6 +102,8 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "$rootScope", "Clients", "$ionicNavBarDelegate", "$state",
  function($scope, $stateParams, $rootScope,Clients, $ionicNavBarDelegate, $state) {
 
+
+  alert($stateParams.clientId);
   //handler for editing parent information
   $scope.editParent = function(){
     $scope.selectedParent = {};
