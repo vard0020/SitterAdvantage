@@ -80,6 +80,11 @@ ion-content div.scroll{
       margin-bottom: 5px;     
       }
 
+      .ionicon{
+
+        color: blue;
+      }
+
 /*
 h3 {
   border-bottom: 1px solid black;

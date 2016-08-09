@@ -1,36 +1,88 @@
 <ion-view view-title="New Task">
-<!-- save and cancel buttons    -->
-     <ion-nav-buttons side="primary">
-      <button class="button correctSize" ng-click="cancelNewTask()">Cancel</button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="secondary">
-      <button class= "button correctSize" ng-click="saveNewTask(cid)">Save</button>
-    </ion-nav-buttons>
+  <ion-nav-buttons side="secondary">
+    <button class="button correctSize" ng-click="editTaskDetails()" ng-hide="toggleVisibility">Edit</button>
+    <button class="button correctSize" ng-click="saveTaskDetails()" ng-hide="!toggleVisibility">Save</button>
 
+  </ion-nav-buttons>
+  <ion-nav-buttons side="primary">
+    <button class="button correctSize secondary" ng-click="cancelNewTask()" ng-hide="!toggleVisibility">Cancel</button>
+
+  </ion-nav-buttons>
   <ion-content>
+    <!-- ******************************** Task sub-page ******************************** -->
+    <div id="task" class="card">
+
+      <div class="item item-text-wrap">
+
+        <div style="margin-bottom:15px;">
+          <input style="font-weight:600;" ng-disabled="!disableEnableForm" class="item-input textDisable ios-blue" type="text" placeholder="Task Title" value="{{task.taskTitle}}">
+        </div>
+
+        <div style="margin-bottom:15px;">
+          <h2>Description</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Description" value="{{task.taskDescription}}">
+        </div>
+
+        <div style="margin-bottom:15px;">
+          <h2>Start Date</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="date" placeholder="Start Date" value="{{task.taskStartdate}}">
+
+        </div>
+
+        <div style="margin-bottom:15px;">
+          <h2>End Date</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="date" placeholder="End Date" value="{{task.taskEnddate}}">
+        </div>
+        <div style="margin-bottom:15px;">
+          <h2>Start time</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="time" placeholder="Start time" value="{{task.taskStarttime}}">
+
+        </div>
+        <div style="margin-bottom:15px;">
+          <h2>End time</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="time" placeholder="End Time" value="{{task.taskEndtime}}">
+
+        </div>
+        <div style="margin-bottom:15px;">
+          <h2>Notes</h2>
+          <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
+          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Notes" value="{{task.taskNotes}}">
+        </div>
+      </div>
+    </div>
+
+    <div class="padding" ng-show="toggleVisibility">
+
+      <button class="button button-assertive button-block" ng-click="deleteTaskDetails()" ng-show="toggleVisibility">
+        Delete Task
+      </button>
+    </div>
+
+  </ion-content>
+</ion-view>                    
+
+  <!-- <ion-content>
       <ion-list class="item-icon-right">
       
 	      <label class="item item-input item-select">  
 			    <div class="input-label">
 			      Client Description
 			    </div>
-			    <!-- <option value="{{client.clientId}}"> {{client.clientDesc}} </option>   loadKiddy(client.clientId) -->
 			    <select ng-model="cid" ng-change="loadKiddy(cid)" >
 			    	<option ng-repeat="client in clientList" value="{{client.clientId}}">{{client.clientDesc}}</option>
 			    </select>
 
 		  </label> 
-
-		  <!-- <label class="item item-input item-select">     
-			    <div class="input-label"> 
-			      Kid Name
-			    </div> -->
-			    <!-- <option value="{{}}">{{kid.kidName}}</option> -->
-			   <!--  <select ng-model="kidId" ng-change="rememberKidId(kidId)">
-			    	<option ng-repeat="kid in kids" value="{{kid.kidId}}">{{kid.kidFirstname}}</option>
-			    </select>
-		  </label>   -->
-
 		  <label class="item item-input">
 		    	<input ng-model="newTask.taskTitle" type="text" placeholder="Task Title">
 		  </label>
@@ -65,4 +117,4 @@
 
 </ion-list>
   </ion-content>
-</ion-view>
+</ion-view> -->
