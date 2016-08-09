@@ -106,7 +106,7 @@ angular.module('SitterAdvantage.clientServices', [])
 
     if (clientId <= clients.length) {
       
-      angular.copy(clients[clientId],selectedClient);
+      angular.copy(clients[clientId-1],selectedClient);
       
       getKidsForClient(clientId);
 
@@ -142,7 +142,13 @@ angular.module('SitterAdvantage.clientServices', [])
    var querySuccessCallback = function(tx, res) {
         console.log("insert statement for adding a newClient succeeded");
         console.log(res);  
-        console.log(res.insertId);   
+        console.log(res.insertId);  
+
+        clients.push({
+                'clientId':res.insertId,
+                'clientDesc':params,
+                'kids': []
+            }); 
 
          d.resolve(res.insertId);
         // get client id for new client after adding it.

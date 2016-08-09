@@ -102,8 +102,6 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "$rootScope", "Clients", "$ionicNavBarDelegate", "$state",
  function($scope, $stateParams, $rootScope,Clients, $ionicNavBarDelegate, $state) {
 
-
-  alert($stateParams.clientId);
   //handler for editing parent information
   $scope.editParent = function(){
     $scope.selectedParent = {};
