@@ -102,6 +102,17 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "$rootScope", "Clients", "$ionicNavBarDelegate", "$state",
  function($scope, $stateParams, $rootScope,Clients, $ionicNavBarDelegate, $state) {
 
+  $scope.selectedClient = {};
+  //used stateParams to access clientId which allows us to navigate to each client's detail page.
+  $scope.selectedClient = Clients.getById($stateParams.clientId);
+  
+  //create functions to show and hide different subpages based on active segmented controls
+   $scope.selectedIndex = 0;
+   $scope.buttonClicked = function(index){
+      $scope.selectedIndex = index;
+      $scope.$apply();
+    } 
+
   //handler for editing parent information
   $scope.editParent = function(){
     $scope.selectedParent = {};
@@ -130,30 +141,13 @@ angular.module('SitterAdvantage.clientControllers', [])
       console.log('Previous state:'+$rootScope.previousState);
       console.log('Current state:'+$rootScope.currentState);
     });
-
-    //we need to 
-    //1. change page title
-    //2. hde edit button
-    //3. show cancel button
-    //hide disabling
-    //show delete button
-
-
   }
 
-
-  $scope.selectedClient = {};
-  
-  //used stateParams to access clientId which allows us to navigate to each client's detail page.
-  $scope.selectedClient = Clients.getById($stateParams.clientId);
-  
-  //create functions to show and hide different subpages based on active segmented controls
-   $scope.selectedIndex = 0;
-   $scope.buttonClicked = function(index){
-      $scope.selectedIndex = index;
-      $scope.$apply();
-    }    
-
+  //handler for creating new task
+    $scope.addNewTask = function(){
+      $state.go("tab.new-task");
+    }
+    
    $scope.editClient = function(selectedClient){
    //Change the format of kids birthday to a date object so it can be edited
    // selectedClient.kids.kidBirthdate
