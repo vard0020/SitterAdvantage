@@ -19,6 +19,8 @@ angular.module('SitterAdvantage.taskControllers', [])
 .controller('NewTaskCtrl', ["$scope", "Tasks", "Clients", "$state", "$stateParams", "$ionicNavBarDelegate",
   function ($scope, Tasks, Clients, $state, $stateParams, $ionicNavBarDelegate) {
 
+  		$ionicNavBarDelegate.showBackButton(false);
+
 		console.log("im inside new task controller");
 		$scope.cancelNewTask = function () {
 			$state.go("tab.tasks");
@@ -26,42 +28,39 @@ angular.module('SitterAdvantage.taskControllers', [])
 
 		//selecting clients and filtering kids to dispay on "new task" form
 		//Clients.loadFromDB();
-		$scope.kids = [];
-		$scope.cid = 0; //3;
-		$scope.clientList = Clients.all();
+		// $scope.kids = [];
+		// $scope.cid = 0; //3;
+		// $scope.clientList = Clients.all();
 
 		//$scope.selectedKidId = 0;
 
 		//console.log($scope.clientList[0]);
 		//console.log("NewTaskCtrl :: $scope.clientList " + $scope.clientList.length);
-		$scope.kidList = []; //[{"kidId":1, "kidName":"Jack"},{"kidId":2, "kidName":"Andrea"},{"kidId":3, "kidName":"Ariana"}];
+		// $scope.kidList = []; //[{"kidId":1, "kidName":"Jack"},{"kidId":2, "kidName":"Andrea"},{"kidId":3, "kidName":"Ariana"}];
 
-		$scope.newTask = {
-			clientId: "",
-			kidId: "",
-			taskTitle: "",
-			taskDescription: "",
-			startDate: "",
-			endDate: "",
-			startTime: "",
-			endTime: "",
-			taskNotes: ""
-		};
+		// $scope.newTask = {
+		// 	clientId: "",
+		// 	kidId: "",
+		// 	taskTitle: "",
+		// 	taskDescription: "",
+		// 	startDate: "",
+		// 	endDate: "",
+		// 	startTime: "",
+		// 	endTime: "",
+		// 	taskNotes: ""
+		// };
 
-		$scope.rememberKidId = function (kidId) {
+		// $scope.rememberKidId = function (kidId) {
 
-			$scope.newTask.kidId = kidId;
+		// 	$scope.newTask.kidId = kidId;
 
-		}
+		// }	
 
 		$scope.saveNewTask = function (data) {
-			console.dir($scope);
-
-			console.dir($scope.newTask);
-
-
-			Tasks.createNewTask($scope.newTask);
-			console.log("inside saveNewTask ");
+			// console.dir($scope);
+			// console.dir($scope.newTask);
+			// Tasks.createNewTask($scope.newTask);
+			// console.log("inside saveNewTask ");
 			$state.go("tab.tasks");
 		};
 
