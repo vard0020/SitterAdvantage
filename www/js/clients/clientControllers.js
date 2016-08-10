@@ -102,6 +102,10 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('ClientDetailCtrl',["$scope", "$stateParams", "$rootScope", "Clients", "$ionicNavBarDelegate", "$state",
  function($scope, $stateParams, $rootScope,Clients, $ionicNavBarDelegate, $state) {
 
+
+    //Show nav back button
+     $ionicNavBarDelegate.showBackButton(true);
+
   $scope.selectedClient = {};
   //used stateParams to access clientId which allows us to navigate to each client's detail page.
   $scope.selectedClient = Clients.getById($stateParams.clientId);
@@ -130,22 +134,13 @@ angular.module('SitterAdvantage.clientControllers', [])
   }
 
   //handler for editing task information
-  $scope.editTask = function(){
-    $state.go("tab.task-detail");
-    $rootScope.previousState;
-    $rootScope.currentState;
-    
-    $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
-      $rootScope.previousState = from.name;
-      $rootScope.currentState = to.name;
-      console.log('Previous state:'+$rootScope.previousState);
-      console.log('Current state:'+$rootScope.currentState);
-    });
+  $scope.editTask = function($index){
+    $state.go("tab.task-detail_client",{ taskId : $scope.selectedClient.tasks[$index].taskId});
   }
 
   //handler for creating new task
     $scope.addNewTask = function(){
-      $state.go("tab.new-task");
+      $state.go("tab.new-task_client");
     }
     
    $scope.editClient = function(selectedClient){
@@ -156,19 +151,20 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('EditParentCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state",
- function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state) {
+.controller('EditParentCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state","$ionicHistory",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state,$ionicHistory) {
 
   $ionicNavBarDelegate.showBackButton(false);
 
   $scope.saveParent = function(){
-      $state.go("tab.client-detail");
+
+      $ionicHistory.goBack();
   }
 
   $scope.cancelParent = function(){
-        
-        $state.go("tab.client-detail");
-        $ionicNavBarDelegate.showBackButton(true);
+
+      $ionicHistory.goBack();
+      $ionicNavBarDelegate.showBackButton(true);
 
       }
 
@@ -178,18 +174,20 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('EditKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicActionSheet",
- function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicActionSheet) {
+.controller('EditKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicActionSheet","$ionicHistory",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicActionSheet,$ionicHistory) {
 
   $scope.saveKid = function(){
-      $state.go("tab.client-detail");
+
+      $ionicHistory.goBack();
      //Note: after going to client-details we should land on kid segmented control, (ng-switch when =1 ) instead of parent
   }
 
   $scope.cancelKid= function(){
-        
-        $state.go("tab.client-detail");
-        $ionicNavBarDelegate.showBackButton(true);
+
+      $ionicHistory.goBack();
+
+      $ionicNavBarDelegate.showBackButton(true);
         //Note: after going to client-details we should land on kid segmented control, (ng-switch when = 2)instead of parent
       }
 

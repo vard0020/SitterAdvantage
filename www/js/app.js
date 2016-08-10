@@ -24,7 +24,7 @@ angular.module('SitterAdvantage',
             //alert("device db (SQLite) loaded");
         } else {
 
-            db = window.openDatabase("APSNetMobileDb", "1.0", "sitter.db", 100 * 1024 * 1024); // browser webSql, a fall-back for debugging
+            db = window.openDatabase("BabySitter", "1.0", "sitter.db", 100 * 1024 * 1024); // browser webSql, a fall-back for debugging
             //alert("browser db (WebSQL) loaded");
         }
             
@@ -74,6 +74,9 @@ angular.module('SitterAdvantage',
     })
     .state('tab.new-task', {
       url: '/newTask',
+        params:{
+          pageFrom : 1 // from Task
+        },
       views: {
         'tab-tasks': {
           templateUrl: 'templates/new-task.html',
@@ -81,8 +84,24 @@ angular.module('SitterAdvantage',
         }
       }
     })
+
+      .state('tab.new-task_client', {
+          url: '/newTask',
+          params:{
+              pageFrom : 2 // from client
+          },
+          views: {
+              'tab-clients': {
+                  templateUrl: 'templates/new-task.html',
+                  controller: 'NewTaskCtrl'
+              }
+          }
+      })
     .state('tab.task-detail', {
       url: '/tasks/:taskId',
+        params:{
+            pageFrom : 1 // from Task
+        },
       views: {
         'tab-tasks': {
           templateUrl: 'templates/task-detail.html',
@@ -91,6 +110,20 @@ angular.module('SitterAdvantage',
         }
       }
     })
+
+      .state('tab.task-detail_client', {
+          url: '/tasks/:taskId',
+          params:{
+              pageFrom : 2 // from client
+          },
+          views: {
+              'tab-clients': {
+                  templateUrl: 'templates/task-detail.html',
+                  controller: 'TasksDetailCtrl',
+                  title: 'EDIT Task'
+              }
+          }
+      })
 
   .state('tab.clients', {
       url: '/clients',
@@ -107,15 +140,6 @@ angular.module('SitterAdvantage',
         'tab-clients': {
           templateUrl: 'templates/client-detail.html',
           controller: 'ClientDetailCtrl'
-        }
-      }
-    })
-    .state('tab.new-client', {
-      url: '/newClient',
-      views: {
-        'tab-clients': {
-          templateUrl: 'templates/new-client.html',
-          controller: 'NewClientCtrl'
         }
       }
     })

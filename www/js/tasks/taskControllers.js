@@ -16,15 +16,28 @@ angular.module('SitterAdvantage.taskControllers', [])
 		}
       }])
 
-.controller('NewTaskCtrl', ["$scope", "Tasks", "Clients", "$state", "$stateParams", "$ionicNavBarDelegate",
-  function ($scope, Tasks, Clients, $state, $stateParams, $ionicNavBarDelegate) {
+.controller('NewTaskCtrl', ["$scope", "Tasks", "Clients", "$state", "$stateParams", "$ionicNavBarDelegate","$ionicHistory",
+  function ($scope, Tasks, Clients, $state, $stateParams, $ionicNavBarDelegate,$ionicHistory) {
 
   		$ionicNavBarDelegate.showBackButton(false);
 
+	  if ($stateParams.pageFrom == 1){
+
+	  	$scope.isHideClientDescr = false;
+
+	  }else{
+
+		  $scope.isHideClientDescr = true;
+	  }
+
 		console.log("im inside new task controller");
 		$scope.cancelNewTask = function () {
-			$state.go("tab.tasks");
+			//$state.go("tab.tasks");
+			
+			$ionicHistory.goBack();
+
 		};
+
 
 		//selecting clients and filtering kids to dispay on "new task" form
 		//Clients.loadFromDB();
@@ -80,24 +93,35 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   }])
 
-.controller('TasksDetailCtrl', ["$scope", "Tasks", "$stateParams", "$state", "$rootScope", "$ionicNavBarDelegate", "Clients", function ($scope, Tasks, $stateParams, $state, $rootScope, $ionicNavBarDelegate, Clients) {
-
-	$rootScope.previousState;
-	$rootScope.currentState;
-
-	$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-		$rootScope.previousState = from.name;
-		$rootScope.currentState = to.name;
-		console.log('Previous state:' + $rootScope.previousState);
-		console.log('Current state:' + $rootScope.currentState);
-	});
+.controller('TasksDetailCtrl', ["$scope", "Tasks", "$stateParams", "$state", "$rootScope", "$ionicNavBarDelegate", "Clients","$ionicHistory", function ($scope, Tasks, $stateParams, $state, $rootScope, $ionicNavBarDelegate, Clients,$ionicHistory) {
 
 
+	if ($stateParams.pageFrom == 1){
+
+		$scope.disableEnableForm = false;
+		$scope.toggleVisibility = false;
+
+		$scope.disableEnableForm = false;
+
+		$scope.pageTitle = "Task Detail";
+
+		$ionicNavBarDelegate.showBackButton(true);
+
+	}else{
+
+		$ionicNavBarDelegate.showBackButton(false);
+
+		$scope.disableEnableForm = true;
+
+		$scope.disableEnableForm = true;
+		$scope.toggleVisibility = true;
+
+		$scope.pageTitle = "Edit Task";
+	}
 	console.log("inside task details controller");
 
 	$scope.task = Tasks.get($stateParams.taskId);
 	
-	$scope.disableEnableForm = false
 
 	$scope.editTaskDetails = function (e) {
 		//$scope.disableEnableForm = function(e){ return true;} 
@@ -105,6 +129,8 @@ angular.module('SitterAdvantage.taskControllers', [])
 		$scope.disableEnableForm = true;
 
 		$scope.toggleVisibility = true;
+
+		$scope.pageTitle = "Edit Task";
 	}
 
 	$scope.saveTaskDetails = function () {
@@ -132,9 +158,21 @@ angular.module('SitterAdvantage.taskControllers', [])
 	}
 
 	$scope.cancelTaskDetails = function () {
-		$scope.toggleVisibility = false;
+
+		if ($stateParams.pageFrom == 1) {
+
+			$scope.toggleVisibility = false;
+			$scope.disableEnableForm = false;
+
+			$scope.pageTitle = "Task Detail";
+
+		} else {
+
+			// Go back to client detail page
+			$ionicHistory.goBack()
+		}
+
 		$ionicNavBarDelegate.showBackButton(true);
-		$scope.disableEnableForm = false;
 	}
 
 	$scope.deleteTaskDetails = function () {
