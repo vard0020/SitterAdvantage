@@ -19,10 +19,12 @@ angular.module('SitterAdvantage.clientControllers', [])
             buttons: [
             {
               text: 'Cancel',
+              type: 'button-light',
+
             },
             {
               text: '<b>Save</b>',
-              type: 'button-dark',
+              type: 'button-positive',
               onTap: function (e) {
                 if (!$scope.data.menuItemText) {
                   //don't allow the user to close untill he added something in input text
@@ -54,10 +56,12 @@ angular.module('SitterAdvantage.clientControllers', [])
             buttons: [
             {
               text: 'Cancel',
+              type: 'button-light',
+
             },
             {
               text: '<b>Save</b>',
-              type: 'button-dark',
+              type: 'button-positive',
               onTap: function (e) {
                 if (!$scope.data.menuItemText) {
                   e.preventDefault();
@@ -138,9 +142,19 @@ angular.module('SitterAdvantage.clientControllers', [])
     $state.go("tab.task-detail_client",{ taskId : $scope.selectedClient.tasks[$index].taskId});
   }
 
-  //handler for creating new task
+  //handler for adding new task
     $scope.addNewTask = function(){
       $state.go("tab.new-task_client");
+    }
+
+    //handler for adding new parent
+    $scope.addNewParent = function(){
+      $state.go("tab.new-parent");
+    }
+
+    //handler for adding new kid
+    $scope.addNewKid = function(){
+      $state.go("tab.new-kid");
     }
     
    $scope.editClient = function(selectedClient){
@@ -221,6 +235,40 @@ angular.module('SitterAdvantage.clientControllers', [])
    });
       
   }
+
+}])
+
+.controller('NewParentCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state","$ionicHistory",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state,$ionicHistory) {
+
+    $ionicNavBarDelegate.showBackButton(false);
+
+
+    $scope.saveParent = function(){
+      $ionicHistory.goBack();
+    }
+
+    $scope.cancelParent = function(){
+      $ionicHistory.goBack();
+    }
+
+
+}])
+
+.controller('NewKidCtrl',["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state","$ionicHistory",
+ function($scope, $stateParams, Clients, $ionicNavBarDelegate, $state,$ionicHistory) {
+
+    $ionicNavBarDelegate.showBackButton(false);
+
+
+    $scope.saveKid = function(){
+      $ionicHistory.goBack();
+    }
+
+    $scope.cancelKid = function(){
+      $ionicHistory.goBack();
+    }
+
 
 }])
 

@@ -26,21 +26,21 @@
         <div style="margin-bottom:15px;">
          <h2>Task Title</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
-          <input class="item-input textDisable ios-blue" type="text" placeholder="Task Title" value="{{task.taskTitle}}">
+          <input class="item-input textDisable ios-blue" type="text" placeholder="Task Title">
         </div>
 
         <div style="margin-bottom:15px;">
           <h2>Task Description</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input class="item-input textDisable" type="text" placeholder="Description" value="{{task.taskDescription}}">
+          <input class="item-input textDisable" type="text" placeholder="Description">
         </div>
 
         <div style="margin-bottom:15px;">
           <h2>Start Date</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input class="item-input textDisable" type="date" placeholder="Start Date" value="{{task.taskStartdate}}">
+          <input class="item-input textDisable" type="date" placeholder="Start Date">
 
         </div>
 
@@ -48,84 +48,28 @@
           <h2>End Date</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input class="item-input textDisable" type="date" placeholder="End Date" value="{{task.taskEnddate}}">
+          <input class="item-input textDisable" type="date" placeholder="End Date">
         </div>
         <div style="margin-bottom:15px;">
           <h2>Start time</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input class="item-input textDisable" type="time" placeholder="Start time" value="{{task.taskStarttime}}">
+          <input class="item-input textDisable" type="time" placeholder="Start time">
 
         </div>
         <div style="margin-bottom:15px;">
           <h2>End time</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input class="item-input textDisable" type="time" placeholder="End Time" value="{{task.taskEndtime}}">
+          <input class="item-input textDisable" type="time" placeholder="End Time">
 
         </div>
         <div style="margin-bottom:15px;">
           <h2>Notes</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
-          <input class="item-input textDisable" type="text" placeholder="Notes" value="{{task.taskNotes}}">
+          <input class="item-input textDisable" type="text" placeholder="Notes">
         </div>
       </div>
     </div>
-
-    <div class="padding">
-
-      <button class="button button-assertive button-block" ng-click="deleteTaskDetails()">
-        Delete Task
-      </button>
-    </div>
-
   </ion-content>
 </ion-view>                    
-
-  <!-- <ion-content>
-      <ion-list class="item-icon-right">
-      
-	      <label class="item item-input item-select">  
-			    <div class="input-label">
-			      Client Description
-			    </div>
-			    <select ng-model="cid" ng-change="loadKiddy(cid)" >
-			    	<option ng-repeat="client in clientList" value="{{client.clientId}}">{{client.clientDesc}}</option>
-			    </select>
-
-		  </label> 
-		  <label class="item item-input">
-		    	<input ng-model="newTask.taskTitle" type="text" placeholder="Task Title">
-		  </label>
-
-		   <label class="item item-input">
-   				 <textarea ng-model="newTask.taskDescription" placeholder="Task Description"></textarea>
- 		   </label>
-
-		  <label class="item item-input">
-				  <span class="input-label">Start Date</span>
-				  <input ng-model="newTask.startDate" type="date">
-		   </label>
-
-		   <label class="item item-input">
-				  <span class="input-label">End Date</span>
-				  <input ng-model="newTask.endDate" type="date">
-		    </label>
-
-		    <label class="item item-input">
-				  <span class="input-label">Start Time</span>
-				  <input ng-model="newTask.startTime" type="time">
-			</label>
-
-		    <label class="item item-input">
-				  <span class="input-label">End Time</span>
-				  <input ng-model="newTask.endTime"type="time">
-			</label>
-
-			 <label class="item item-input">
-   				 <textarea ng-model="newTask.taskNotes" placeholder="Task Notes"></textarea>
- 		   </label>
-
-</ion-list>
-  </ion-content>
-</ion-view> -->

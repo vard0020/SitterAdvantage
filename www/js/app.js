@@ -173,6 +173,25 @@ angular.module('SitterAdvantage',
       }
     })
 
+          .state('tab.new-parent', {
+      url: '/editClient/new-parent',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/new-parent.html',
+          controller: 'NewParentCtrl'
+        }
+      }
+    })
+           .state('tab.new-kid', {
+      url: '/editClient/new-kid',
+      views: {
+        'tab-clients': {
+          templateUrl: 'templates/new-kid.html',
+          controller: 'NewKidCtrl'
+        }
+      }
+    })
+
   .state('tab.emergency', {
       url: '/emergency',
       views: {
@@ -191,15 +210,25 @@ angular.module('SitterAdvantage',
         }
       }
     })
-    .state('tab.resources-detail', {
+    .state('tab.potential-job-checklist', {
       url: '/resources/resourcesId',
       views: {
         'tab-resources': {
-          templateUrl: 'templates/checklist.html',
-          controller: 'ResourcesCtrl'
+          templateUrl: 'templates/potential-job-checklist.html'
         }
       }
-    });
+    })
+    .state('tab.location-checklist', {
+          url: '/resources/locationId',
+          views: {
+            'tab-resources': {
+              templateUrl: 'templates/location-checklist.html'
+            }
+          }
+        })
+
+
+    ;
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/tasks');
