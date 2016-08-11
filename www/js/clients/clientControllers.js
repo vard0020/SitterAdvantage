@@ -114,13 +114,58 @@ angular.module('SitterAdvantage.clientControllers', [])
   //used stateParams to access clientId which allows us to navigate to each client's detail page.
   $scope.selectedClient = Clients.getById($stateParams.clientId);
   
+  
   //create functions to show and hide different subpages based on active segmented controls
-   $scope.selectedIndex = 0;
+
+  if (!$rootScope.segmentIndex) {
+
+    $rootScope.segmentIndex = 0;
+  }
+
+   $scope.selectedIndex = $rootScope.segmentIndex;
+   $scope.setSelectedButton = $scope.selectedIndex;
+
    $scope.buttonClicked = function(index){
+
+      $scope.updateSelection(index);
+
       $scope.selectedIndex = index;
+      $rootScope.segmentIndex = index;
       $scope.$apply();
     } 
 
+    $scope.updateSelection = function(index){
+
+      alert(index)
+
+      if (index == 0) {
+
+      $scope.selectedParent = true;
+      $scope.selectedKid = false;
+      $scope.selectedTask = false;
+
+    }else if (index == 1) {
+
+      $scope.selectedParent = false;
+      $scope.selectedKid = true;
+      $scope.selectedTask = false;
+      
+    } else if (index == 2) {
+
+      $scope.selectedParent = false;
+      $scope.selectedKid = false;
+      $scope.selectedTask = true;
+    }
+
+    }
+
+      $scope.$on('$viewContentLoaded', function(){
+
+        $scope.updateSelection($scope.selectedIndex);
+        $scope.$apply();    
+        //Here your view content is fully loaded !!
+      });
+   
   //handler for editing parent information
   $scope.editParent = function(){
     $scope.selectedParent = {};

@@ -21,6 +21,8 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   		$ionicNavBarDelegate.showBackButton(false);
 
+  		$scope.clientArray = Clients.all();
+
 	  if ($stateParams.pageFrom == 1){
 
 	  	$scope.isHideClientDescr = false;
@@ -37,6 +39,46 @@ angular.module('SitterAdvantage.taskControllers', [])
 			$ionicHistory.goBack();
 
 		};
+
+		$scope.newTaskParams = {};
+
+		$scope.saveNewTask = function () {
+			// console.dir($scope);
+			// console.dir($scope.newTask);
+			// Tasks.createNewTask($scope.newTask);
+			// console.log("inside saveNewTask ");
+			// Go back to client detail page
+
+			//alert("Client Id - "+ $scope.selectedClientId);
+
+			var params = {};
+
+			params.taskTitle = $scope.newTaskParams.taskTitle;
+			params.taskDescription = $scope.newTaskParams.taskDesc;
+			params.startDate = $scope.newTaskParams.taskStartDate;
+			params.endDate = $scope.newTaskParams.taskEndDate;
+			params.startTime = $scope.newTaskParams.taskStartTime;
+			params.endTime = $scope.newTaskParams.taskEndTime;
+			params.taskNotes = $scope.newTaskParams.taskNotes;
+			params.clientId = $scope.newTaskParams.selectedClientId;
+			params.kidId = 0;
+
+			console.log("params "+params);
+			//Call service function to add new task
+			Tasks.createNewTask(params);
+			
+			$ionicHistory.goBack();
+		};
+
+		$scope.getSelectedValue= function (client) {
+
+
+	       //$scope.CategoryID = category.id;
+			alert("scope - "+ client.clientDesc);
+
+			$scope.selectedClientId = client.clientId;
+
+	    };
 
 
 		//selecting clients and filtering kids to dispay on "new task" form
@@ -69,27 +111,21 @@ angular.module('SitterAdvantage.taskControllers', [])
 
 		// }	
 
-		$scope.saveNewTask = function (data) {
-			// console.dir($scope);
-			// console.dir($scope.newTask);
-			// Tasks.createNewTask($scope.newTask);
-			// console.log("inside saveNewTask ");
-			$state.go("tab.tasks");
-		};
+		
 
-		$scope.loadKiddy = function (cid) {
-			console.log(JSON.stringify($scope.clientList));
-			console.log(cid);
-			var num = $scope.clientList.length;
-			for (var c = 0; c < num; c++) {
-				console.log("matching..." + $scope.clientList[c].clientId + " " + cid);
-				if ($scope.clientList[c].clientId == cid) {
-					$scope.kids = $scope.clientList[c].kids;
-					$scope.newTask.clientId = cid;
-					console.log(JSON.stringify($scope.kids));
-				}
-			}
-		}
+		// $scope.loadKiddy = function (cid) {
+		// 	console.log(JSON.stringify($scope.clientList));
+		// 	console.log(cid);
+		// 	var num = $scope.clientList.length;
+		// 	for (var c = 0; c < num; c++) {
+		// 		console.log("matching..." + $scope.clientList[c].clientId + " " + cid);
+		// 		if ($scope.clientList[c].clientId == cid) {
+		// 			$scope.kids = $scope.clientList[c].kids;
+		// 			$scope.newTask.clientId = cid;
+		// 			console.log(JSON.stringify($scope.kids));
+		// 		}
+		// 	}
+		// }
 
   }])
 
