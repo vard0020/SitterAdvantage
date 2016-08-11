@@ -51,6 +51,14 @@ angular.module('SitterAdvantage.taskControllers', [])
 
 			//alert("Client Id - "+ $scope.selectedClientId);
 
+			// To add Task from Clien detail page
+			 $scope.selectedClientId = $stateParams.clientId;
+
+			 // if (!$scope.selectedClientId) {
+
+			 // 	alert("Please select client.")
+			 // }
+
 			var params = {};
 
 			params.taskTitle = $scope.newTaskParams.taskTitle;
@@ -60,7 +68,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 			params.startTime = $scope.newTaskParams.taskStartTime;
 			params.endTime = $scope.newTaskParams.taskEndTime;
 			params.taskNotes = $scope.newTaskParams.taskNotes;
-			params.clientId = $scope.newTaskParams.selectedClientId;
+			params.clientId = $scope.selectedClientId;
 			params.kidId = 0;
 
 			console.log("params "+params);
@@ -205,7 +213,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 		} else {
 
 			// Go back to client detail page
-			$ionicHistory.goBack()
+			$ionicHistory.goBack();
 		}
 
 		$ionicNavBarDelegate.showBackButton(true);
@@ -214,7 +222,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 	$scope.deleteTaskDetails = function () {
 		//Delete task
 		Tasks.deleteTask($scope.task.taskId);
-		$state.go("tab.tasks");
+		$ionicHistory.goBack();
 	}
 	
 	$scope.editTask = function () {

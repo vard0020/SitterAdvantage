@@ -32,7 +32,7 @@ angular.module('SitterAdvantage',
       
       console.log("db should have been opened at this step");
             dbService.createTables();
-            dbService.insertTestData();
+            //dbService.insertTestData();
             Tasks.loadFromDB();
             Clients.loadFromDB();
     }
@@ -88,7 +88,8 @@ angular.module('SitterAdvantage',
       .state('tab.new-task_client', {
           url: '/newTask',
           params:{
-              pageFrom : 2 // from client
+              pageFrom : 2, // from client,
+              clientId : 1
           },
           views: {
               'tab-clients': {
@@ -223,6 +224,14 @@ angular.module('SitterAdvantage',
           views: {
             'tab-resources': {
               templateUrl: 'templates/location-checklist.html'
+            }
+          }
+        })
+    .state('tab.pre-job-checklist', {
+          url: '/resources/prejobId',
+          views: {
+            'tab-resources': {
+              templateUrl: 'templates/pre-job-checklist.html'
             }
           }
         })

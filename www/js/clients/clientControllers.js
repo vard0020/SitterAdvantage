@@ -136,7 +136,7 @@ angular.module('SitterAdvantage.clientControllers', [])
 
     $scope.updateSelection = function(index){
 
-      alert(index)
+      //alert(index)
 
       if (index == 0) {
 
@@ -189,11 +189,13 @@ angular.module('SitterAdvantage.clientControllers', [])
 
   //handler for adding new task
     $scope.addNewTask = function(){
-      $state.go("tab.new-task_client");
+
+      $state.go("tab.new-task_client",{ clientId: $stateParams.clientId });
     }
 
     //handler for adding new parent
     $scope.addNewParent = function(){
+
       $state.go("tab.new-parent");
     }
 

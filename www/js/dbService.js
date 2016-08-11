@@ -5,7 +5,14 @@ angular.module('SitterAdvantage.dbService', [])
 	//---------------------- function responsible to create all the tables once ----------------------
 	var createTables = function(){
 	  db.transaction(function(tx) {
+	  	  // tx.executeSql("DROP TABLE clients");
+	  	  // tx.executeSql("DROP TABLE parents");
 	  	  // tx.executeSql("DROP TABLE tasks");
+	  	  // tx.executeSql("DROP TABLE kids");
+	  	  // tx.executeSql("DROP TABLE medications");
+	  	  // tx.executeSql("DROP TABLE allergies");
+	  	  // tx.executeSql("DROP TABLE disabilities");
+
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS clients (clientId integer primary key , clientDesc text)",[], function(){}, function(){});
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS parents(parentId integer primary key , parentFirstname text, parentLastname text, parentStreet text, parentUnit text, parentCity text, parentState text, parentZipcode text, parentPrimaryphone text, parentSecondaryphone text, parentEmailid text, parentNotes text, clientId integer)",[], function(){}, function(){});  
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS tasks(taskId integer primary key , taskTitle text, taskDescription text, taskStartdate numeric, taskEnddate numeric, taskStarttime numeric, taskEndtime numeric, taskNotes text,clientId integer, kidId integer)" , [], function(){}, function(){});
@@ -13,8 +20,8 @@ angular.module('SitterAdvantage.dbService', [])
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS medications(medicationId integer primary key, medicationDescription text, kidId integer)", [], function(){}, function(){});
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS allergies(allergyId integer primary key, allergyDescription text, kidId integer)" , [], function(){}, function(){});
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS disabilities(disabilityId integer primary key , disabilityDescription text, kidId integer)" , [], function(){}, function(){}); 		
-	     //We will not create a relationship table at this stage.
-  		//tx.executeSql("CREATE TABLE IF NOT EXISTS relationships(relationshipId integer primary key , relationshipDesc text, parentId integer)",[], function(){}, function(){});
+	   //   We will not create a relationship table at this stage.
+  		// tx.executeSql("CREATE TABLE IF NOT EXISTS relationships(relationshipId integer primary key , relationshipDesc text, parentId integer)",[], function(){}, function(){});
 	  },
 
 	  function(){

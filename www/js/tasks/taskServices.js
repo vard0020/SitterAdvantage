@@ -8,6 +8,8 @@ angular.module('SitterAdvantage.taskServices', [])
 
   var loadFromDB = function(){
 
+    tasks = [];
+    
     var query = "SELECT * FROM tasks t INNER JOIN clients c WHERE t.clientId = c.clientId";
     var querySuccessCallback = function(tx, res) {
        console.log("select statement for tasks succeeded");
@@ -126,7 +128,10 @@ angular.module('SitterAdvantage.taskServices', [])
     var query = "DELETE FROM tasks where taskId = ?";
     var querySuccessCallback = function(tx, res) {
         console.log("delete task succeeded");
-        console.log(res);     
+        console.log(res);  
+
+      //tasks = $filter('filter')(tasks, {taskId: '!taskId'})        
+
     };
 
 	 var queryErrorCallback = function (err) {
@@ -141,6 +146,7 @@ angular.module('SitterAdvantage.taskServices', [])
     loadFromDB: loadFromDB,
     all: function() {
 
+      //loadFromDB();
       //tasks.splice(0, tasks.length);
       return tasks;
     },
