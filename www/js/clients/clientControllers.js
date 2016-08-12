@@ -132,10 +132,27 @@ angular.module('SitterAdvantage.clientControllers', [])
 
         //Show nav back button
         $ionicNavBarDelegate.showBackButton(true);
-
         $scope.selectedClient = {};
         //used stateParams to access clientId which allows us to navigate to each client's detail page.
-        $scope.selectedClient = Clients.getClientById($stateParams.clientId);
+     
+     //Get parents
+         Clients.getParentsForClient($stateParams.clientId).then(function (parents) {
+                if (!parents) return;
+                $scope.selectedClient.parents = parents;
+            });
+
+     //Get kids
+        Clients.getKidsForClientWithID($stateParams.clientId).then(function (kids) {
+                if (!kids) return;
+                $scope.selectedClient.kids = kids;
+            });
+
+     //Get Tasks
+        Clients.getTasksForClient($stateParams.clientId).then(function (tasks) {
+                if (!tasks) return;
+                $scope.selectedClient.tasks = tasks;
+            });
+                                                              
         //create functions to show and hide different subpages based on active segmented controls
 
         if (!$rootScope.segmentIndex) {
@@ -188,23 +205,18 @@ angular.module('SitterAdvantage.clientControllers', [])
         });
 
         //handler for editing parent information
-        $scope.editParent = function () {
-            $scope.selectedParent = {};
-            $scope.selectedParent = Clients.getById($stateParams.parentId);
+        $scope.editParent = function ($index) {
             $state.go("tab.edit-parent", {
-                parentId: $stateParams.parentId
+                parentId: $scope.selectedClient.parents[$index].parentId
             });
         }
 
         //handler for editing kid information
-        $scope.editKid = function () {
-            $scope.selectedKid = {};
-            $scope.selectedKid = Clients.getById($stateParams.kidId);
+        $scope.editKid = function ($index) {
             $state.go("tab.edit-kid", {
-                kidId: $stateParams.kidId
+                kidId: $scope.selectedClient.kids[$index].kidId
             });
             $ionicNavBarDelegate.showBackButton(false);
-
         }
 
         //handler for editing task information
@@ -247,7 +259,12 @@ angular.module('SitterAdvantage.clientControllers', [])
  function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory) {
 
         $ionicNavBarDelegate.showBackButton(false);
-
+     
+      Clients.getParentById($stateParams.parentId).then(function (parent) {
+                if (!parent) return;
+                $scope.parent = parent;
+            });
+     
         $scope.saveParent = function () {
 
             $ionicHistory.goBack();
@@ -274,6 +291,11 @@ angular.module('SitterAdvantage.clientControllers', [])
             $ionicHistory.goBack();
             //Note: after going to client-details we should land on kid segmented control, (ng-switch when =1 ) instead of parent
         }
+        
+        Clients.getKidById($stateParams.kidId).then(function (kid) {
+                if (!kid) return;
+                $scope.kid = kid;
+            });
 
         $scope.cancelKid = function () {
 

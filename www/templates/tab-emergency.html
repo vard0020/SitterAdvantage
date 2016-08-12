@@ -6,7 +6,7 @@
     <!-- <ion-list> -->
 	  <ion-item>
     <div class="padding">
-        <button class="button button-block icon-left button-assertive" ng-click="callNumber(311)">Call 311</button>        
+        <button class="button button-block icon-left button-assertive" ng-click="callNumber(311)">Call 911</button>        
     </div>
 	  <div class="padding">
 	  <button class="button button-block button-balanced icon-left ion-location" ng-click="showModal()"> Show My Location </button>
@@ -22,8 +22,8 @@
 			<div id="parent" ng-repeat="parent in selectedClient.parents" class="card">
 
 				<div class="item item-divider item-icon-right">
-					{{parent.parentFirstname + " " + parent.parentLastname}}
-					
+<!--					{{parent.parentFirstname + " " + parent.parentLastname}}-->
+                    John Smith
 					<div class="icon">
 						<a ng-href="sms:13332221111&body={{ sosMessage }}" class="button button-icon" id="parent1"> 
 							<!-- ng-click="sendSMS(6138539911)" -->

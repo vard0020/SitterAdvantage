@@ -21,8 +21,6 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   		$ionicNavBarDelegate.showBackButton(false);
 
-  		$scope.clientArray = Clients.all();
-
 	  if ($stateParams.pageFrom == 1){
 
 	  	$scope.isHideClientDescr = false;

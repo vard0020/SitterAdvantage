@@ -21,7 +21,7 @@
 					{{parent.parentFirstname + " " + parent.parentLastname}}
 					
 					<div class="icon">
-						 <button class="button button-icon" style="padding-left:30px;" ng-click="editParent()">
+						 <button class="button button-icon" style="padding-left:30px;" ng-click="editParent($index)">
 							<i class = "icon ion-edit"></i>
 						</button>
         			</div>	
@@ -75,7 +75,7 @@
 					{{kid.kidFirstname}}
 					
 					<div class="icon">
-						 <button class="button button-icon" style="padding-left:30px;" ng-click="editKid()">
+						 <button class="button button-icon" style="padding-left:30px;" ng-click="editKid($index)">
 							<i class = "icon ion-edit"></i>
 						</button>
         			</div>										
