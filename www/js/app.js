@@ -32,9 +32,9 @@ angular.module('SitterAdvantage',
       
       console.log("db should have been opened at this step");
             dbService.createTables();
-            //dbService.insertTestData();
-            Tasks.loadFromDB();
-            Clients.loadFromDB();
+            dbService.insertTestData();
+//            Tasks.loadFromDB();
+//            Clients.loadFromDB();
     }
     });
 })

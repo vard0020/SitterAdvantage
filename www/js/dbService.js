@@ -5,23 +5,19 @@ angular.module('SitterAdvantage.dbService', [])
 	//---------------------- function responsible to create all the tables once ----------------------
 	var createTables = function(){
 	  db.transaction(function(tx) {
-	  	  // tx.executeSql("DROP TABLE clients");
-	  	  // tx.executeSql("DROP TABLE parents");
-	  	  // tx.executeSql("DROP TABLE tasks");
-	  	  // tx.executeSql("DROP TABLE kids");
-	  	  // tx.executeSql("DROP TABLE medications");
-	  	  // tx.executeSql("DROP TABLE allergies");
-	  	  // tx.executeSql("DROP TABLE disabilities");
+//	  	   tx.executeSql("DROP TABLE clients");
+//	  	   tx.executeSql("DROP TABLE parents");
+//	  	   tx.executeSql("DROP TABLE tasks");
+//	  	   tx.executeSql("DROP TABLE kids");
+//          tx.executeSql("DROP TABLE disabilities");
+//          tx.executeSql("DROP TABLE medications");
+//          tx.executeSql("DROP TABLE allergies");
 
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS clients (clientId integer primary key , clientDesc text)",[], function(){}, function(){});
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS parents(parentId integer primary key , parentFirstname text, parentLastname text, parentStreet text, parentUnit text, parentCity text, parentState text, parentZipcode text, parentPrimaryphone text, parentSecondaryphone text, parentEmailid text, parentNotes text, clientId integer)",[], function(){}, function(){});  
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS tasks(taskId integer primary key , taskTitle text, taskDescription text, taskStartdate numeric, taskEnddate numeric, taskStarttime numeric, taskEndtime numeric, taskNotes text,clientId integer, kidId integer)" , [], function(){}, function(){});
-	      tx.executeSql("CREATE TABLE IF NOT EXISTS kids(kidId integer primary key, kidFirstname text, kidLastname, kidBirthdate numeric, kidGender text, kidPicture text, kidNotes text, clientId integer)" , [], function(){}, function(){});
-	      tx.executeSql("CREATE TABLE IF NOT EXISTS medications(medicationId integer primary key, medicationDescription text, kidId integer)", [], function(){}, function(){});
-	      tx.executeSql("CREATE TABLE IF NOT EXISTS allergies(allergyId integer primary key, allergyDescription text, kidId integer)" , [], function(){}, function(){});
-	      tx.executeSql("CREATE TABLE IF NOT EXISTS disabilities(disabilityId integer primary key , disabilityDescription text, kidId integer)" , [], function(){}, function(){}); 		
-	   //   We will not create a relationship table at this stage.
-  		// tx.executeSql("CREATE TABLE IF NOT EXISTS relationships(relationshipId integer primary key , relationshipDesc text, parentId integer)",[], function(){}, function(){});
+	      tx.executeSql("CREATE TABLE IF NOT EXISTS kids(kidId integer primary key, kidFirstname text, kidLastname, kidBirthdate numeric, kidGender text, kidPicture text, kidNotes text,clientId integer, allergyDescription text,disabilityDescription text, medicationDescription text)" , [], function(){}, function(){});
+          
 	  },
 
 	  function(){
@@ -56,18 +52,18 @@ angular.module('SitterAdvantage.dbService', [])
 	      ["George","Jetson","Single Dad - Custody","990 Pluto Drive Street","","Denver","Collorado","23567","683-559-2295","165-345-4451","george.jetsen@gmail.com","3"], function(){ }, function(){});
 	
 	    //6 kids
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Rohn", "Smith", "2011-03-12", "Male", "No iPads or phones allowed", "Rohn.jpg", "1"], function(){}, function(){});
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Samuel", "Smith", "17/June/2006", "Male", "Video games off at 8:00", "Samuel.jpg", "1"], function(){}, function(){});
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Jane", "Smith", "09/March/2008", "Female", "Sensitive to high volume sounds or music", "Jane.jpg","1"], function(){}, function(){});
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Fred", "Jones", "06/July/2011", "Male", "Limit watching TV to 2 hours maximum.", "Fred.jpg", "2"], function(){}, function(){});
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Judy", "Jetson", "12/12/2012", "Female", "She likes reading books.", "Judy.jpg", "3"], function(){}, function(){});
-	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId) VALUES (?,?,?,?,?,?,?)", 
-	      ["Robert", "Jetson", "11/October/2015", "Male", "No meat is allowed", "Robert.jpg","3"], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,  allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Rohn", "Smith", "2011-03-12", "Male", "No iPads or phones allowed", "Rohn.jpg", "1","","",""], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Samuel", "Smith", "17/June/2006", "Male", "Video games off at 8:00", "Samuel.jpg", "1","","",""], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Jane", "Smith", "09/March/2008", "Female", "Sensitive to high volume sounds or music", "Jane.jpg","1","","",""], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Fred", "Jones", "06/July/2011", "Male", "Limit watching TV to 2 hours maximum.", "Fred.jpg", "2","","",""], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Judy", "Jetson", "12/12/2012", "Female", "She likes reading books.", "Judy.jpg", "3","","",""], function(){}, function(){});
+	    tx.executeSql("INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)", 
+	      ["Robert", "Jetson", "11/October/2015", "Male", "No meat is allowed", "Robert.jpg","3","","",""], function(){}, function(){});
 	    //4 tasks
 
 	    console.log("----- TASK -----");

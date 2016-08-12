@@ -146,7 +146,7 @@ angular.module('SitterAdvantage.taskServices', [])
     loadFromDB: loadFromDB,
     all: function() {
 
-      //loadFromDB();
+      loadFromDB();
       //tasks.splice(0, tasks.length);
       return tasks;
     },
