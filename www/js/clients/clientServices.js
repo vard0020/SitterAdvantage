@@ -21,7 +21,7 @@ angular.module('SitterAdvantage.clientServices', [])
             var query = "SELECT * FROM clients WHERE clientId = ?";
             var querySuccessCallback = function (tx, res) {
                 console.log(res);
-                d.resolve(res.rows.item[0]);
+                d.resolve(res.rows.item(0));
             };
             //error call back
             var queryErrorCallback = function (err) {
@@ -39,7 +39,7 @@ angular.module('SitterAdvantage.clientServices', [])
 
             var d = $q.defer();
 
-            var query = "SELECT clientId, clientDesc FROM clients";
+            var query = "SELECT * FROM clients";
             var queryErrorCallback = function (err) {
                 console.error(err);
                 d.resolve(err);
@@ -152,8 +152,7 @@ angular.module('SitterAdvantage.clientServices', [])
             }
             var querySuccessCallback = function (tx, res) {
                 console.log(res);
-
-                d.resolve(res.rows.item[0]);
+                d.resolve(res.rows.item(0));
             };
 
             dbService.executeStatement(query, [kidId], querySuccessCallback, queryErrorCallback);
@@ -162,11 +161,11 @@ angular.module('SitterAdvantage.clientServices', [])
         },
 
         //this function gets the kids names to display in client list tab
-        getKids: function (id, client_index) {
+        getKidsForClientWithID: function (clientId) {
 
             var d = $q.defer();
 
-            var query = "SELECT k.kidId, k.kidFirstname FROM kids k WHERE k.clientId = ?";
+            var query = "SELECT * FROM kids k WHERE k.clientId = ?";
             var queryErrorCallback = function (err) {
                 console.error(err);
                 d.resolve(err);
@@ -182,7 +181,7 @@ angular.module('SitterAdvantage.clientServices', [])
                 d.resolve(kids);
             };
 
-            dbService.executeStatement(query, [id], querySuccessCallback, queryErrorCallback);
+            dbService.executeStatement(query, [clientId], querySuccessCallback, queryErrorCallback);
 
             return d.promise;
         },
@@ -204,6 +203,7 @@ angular.module('SitterAdvantage.clientServices', [])
                     kids.push(res.rows.item(k));
                 }
                 client.kids = kids;
+                // Return back to "then" function with data
                 d.resolve(client);
             };
 
@@ -235,6 +235,28 @@ angular.module('SitterAdvantage.clientServices', [])
 
             return d.promise;
         },
+        
+        // Update "kid" info
+        editKidInfo: function (kidInfo) {
+
+            var d = $q.defer();
+            var id = kidInfo.kidId;
+            var query = 'UPDATE kids SET kidFirstname = ?, kidLastname = ?, kidBirthdate = ?, kidGender = ?, kidNotes = ?, kidPicture = ?,  allergyDescription = ?,disabilityDescription = ?, medicationDescription = ? WHERE kidId=?';
+            
+            var queryErrorCallback = function (err) {
+                console.error(err);
+                d.resolve(err);
+            }
+            var querySuccessCallback = function (tx, res) {
+                console.log("update statement for updating a kid succeeded");
+                console.log(res);
+
+                d.resolve(res);
+            };
+            dbService.executeStatement(query, [kidInfo.kidFirstname , kidInfo.kidLastname , kidInfo.kidBirthdate, kidInfo.kidGender, kidInfo.kidNotes, kidInfo.kidPicture,  kidInfo.allergyDescription,kidInfo.disabilityDescription, kidInfo.medicationDescription, id], querySuccessCallback, queryErrorCallback);
+
+            return d.promise;
+        },
 
         //Delete "kid"    
         deleteKid: function (kidId) {
@@ -255,7 +277,6 @@ angular.module('SitterAdvantage.clientServices', [])
             };
 
             dbService.executeStatement(query, [kidId], querySuccessCallback, queryErrorCallback);
-
             return d.promise;
         },
 
@@ -271,9 +292,10 @@ angular.module('SitterAdvantage.clientServices', [])
                 d.resolve(err);
             }
             var querySuccessCallback = function (tx, res) {
-                console.log(res);
-
-                d.resolve(res.rows.item[0]);
+                console.log(res.rows.item(0));
+                
+                var parent = res.rows.item(0);
+                d.resolve(parent);
             };
 
             dbService.executeStatement(query, [parentId], querySuccessCallback, queryErrorCallback);
@@ -329,6 +351,27 @@ angular.module('SitterAdvantage.clientServices', [])
             return d.promise;
         },
 
+        // Update "parent" info
+        editParentInfo: function (parentInfo) {
+
+            var d = $q.defer();
+            var id = parentInfo.parentId;
+            var query = 'UPDATE kids SET parentFirstname = ?, parentLastname = ?, parentNotes = ?, parentStreet = ?, parentUnit = ?, parentCity = ?, parentState = ?, parentZipcode = ?, parentPrimaryphone = ?, parentSecondaryphone = ?, parentEmailid = ?, clientId = ? WHERE parentId=?';
+            
+            var queryErrorCallback = function (err) {
+                console.error(err);
+                d.resolve(err);
+            }
+            var querySuccessCallback = function (tx, res) {
+                console.log("update statement for updating a parent succeeded");
+                console.log(res);
+
+                d.resolve(res);
+            };
+            dbService.executeStatement(query, [parentInfo.parentFirstname , parentInfo.parentLastname, parentInfo.parentNotes, parentInfo.parentStreet, parentInfo.parentUnit, parentInfo.parentCity, parentInfo.parentState, parentInfo.parentZipcode, parentInfo.parentPrimaryphone, parentInfo.parentSecondaryphone, parentInfo.parentEmailid, parentInfo.clientId, id], querySuccessCallback, queryErrorCallback);
+
+            return d.promise;
+        },
         //Delete "parent"    
         deleteParent: function (parentId) {
 
@@ -350,8 +393,6 @@ angular.module('SitterAdvantage.clientServices', [])
 
             return d.promise;
         },
-
-
 
         //// ********************* Tasks  ********************* ////
 
