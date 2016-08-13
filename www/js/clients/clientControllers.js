@@ -29,13 +29,15 @@ angular.module('SitterAdvantage.clientControllers', [])
                 }
             };
 
-            $scope.editClientDescription = function () {
+            $scope.editClientDescription = function ($index) {
                 // pop up Alert box
                 $scope.data = {};
 
+                $scope.selectedClient = $scope.clients[$index];
+
                 var popUp = $ionicPopup.show({
-                    template: '<input type="text" ng-model="data.menuItemText"/>',
-                    title: 'Edit Family Name',
+                    template: '<input type="text" ng-model="selectedClient.clientDesc" />',
+                    title: 'Edit Client Description',
                     scope: $scope,
                     buttons: [
                         {
@@ -47,11 +49,11 @@ angular.module('SitterAdvantage.clientControllers', [])
                             text: '<b>Save</b>',
                             type: 'button-positive',
                             onTap: function (e) {
-                                if (!$scope.data.menuItemText) {
+                                if (!$scope.selectedClient.clientDesc) {
                                     //don't allow the user to close untill he added something in input text
                                     e.preventDefault();
                                 } else {
-                                    return $scope.data.menuItemText;
+                                    return $scope.selectedClient.clientDesc;
                                 }
                             }
 
@@ -61,12 +63,27 @@ angular.module('SitterAdvantage.clientControllers', [])
 
                 popUp.then(function (res) {
                     if (!res) return;
-                    //$scope.saveClientDescription = LocalStorage.addMenuItem(res);
+                    $scope.updateClientDescription(res, $index);
                 });
             };
+
+        $scope.updateClientDescription = function(clientDescription, $index) {
+
+            // Insert client in database
+            Clients.editClientDescription($scope.selectedClient).then(function (res) {
+                if (!res) return;
+                console.log(res)
+
+                $scope.clients[$index] = $scope.selectedClient;
+                //$state.reload();
+
+            });
+        }
      
             //delete client
-            $scope.deleteClient = function(){
+            $scope.deleteClient = function($index){
+
+                var client = $scope.clients[$index];
                 
                  var hideSheet = $ionicActionSheet.show({
          
@@ -79,12 +96,14 @@ angular.module('SitterAdvantage.clientControllers', [])
             
                 destructiveButtonClicked: function () {
                     //Delete client
-                    $ionicHistory.goBack();
-                    hideSheet();
+
+                    Clients.deleteClient(client.clientId).then(function (res) {
+
+                        $scope.clients.splice($index, 1);
+                        hideSheet();
+                    });
                 }
             });
-                
-                
             };
 
             $scope.addClient = function () {
