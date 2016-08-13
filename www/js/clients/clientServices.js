@@ -21,7 +21,9 @@ angular.module('SitterAdvantage.clientServices', [])
             var query = "SELECT * FROM clients WHERE clientId = ?";
             var querySuccessCallback = function (tx, res) {
                 console.log(res);
-                d.resolve(res.rows.item(0));
+                
+                var client = res.rows.item(0);
+                d.resolve(client);
             };
             //error call back
             var queryErrorCallback = function (err) {
@@ -152,7 +154,10 @@ angular.module('SitterAdvantage.clientServices', [])
             }
             var querySuccessCallback = function (tx, res) {
                 console.log(res);
-                d.resolve(res.rows.item(0));
+                
+                var kid = res.rows.item(0);
+                d.resolve(kid);
+                
             };
 
             dbService.executeStatement(query, [kidId], querySuccessCallback, queryErrorCallback);

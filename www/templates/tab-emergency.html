@@ -19,11 +19,10 @@
  <div class="list">
 	 
 	 <!-- ******************************** Parent sub-page ******************************** -->
-			<div id="parent" ng-repeat="parent in selectedClient.parents" class="card">
+			<div id="parent" ng-repeat="parent in parents" class="card">
 
 				<div class="item item-divider item-icon-right">
-<!--					{{parent.parentFirstname + " " + parent.parentLastname}}-->
-                    John Smith
+					{{parent.parentFirstname + " " + parent.parentLastname}}                    
 					<div class="icon">
 						<a ng-href="sms:13332221111&body={{ sosMessage }}" class="button button-icon" id="parent1"> 
 							<!-- ng-click="sendSMS(6138539911)" -->

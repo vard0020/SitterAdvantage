@@ -135,7 +135,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 
   }])
 
-.controller('TasksDetailCtrl', ["$scope", "Tasks", "$stateParams", "$state", "$rootScope", "$ionicNavBarDelegate", "Clients","$ionicHistory", function ($scope, Tasks, $stateParams, $state, $rootScope, $ionicNavBarDelegate, Clients,$ionicHistory) {
+.controller('TasksDetailCtrl', ["$scope", "Tasks", "$stateParams", "$state", "$rootScope", "$ionicNavBarDelegate", "Clients","$ionicHistory","$ionicActionSheet", function ($scope, Tasks, $stateParams, $state, $rootScope, $ionicNavBarDelegate, Clients,$ionicHistory,$ionicActionSheet) {
 
 
 	if ($stateParams.pageFrom == 1){
@@ -218,9 +218,24 @@ angular.module('SitterAdvantage.taskControllers', [])
 	}
 
 	$scope.deleteTaskDetails = function () {
-		//Delete task
-		Tasks.deleteTask($scope.task.taskId);
-		$ionicHistory.goBack();
+        
+        var hideSheet = $ionicActionSheet.show({
+         
+                destructiveText: 'Delete Task',
+                cancelText: 'Cancel',
+
+                cancel: function () {
+                    hideSheet();
+                },
+            
+                destructiveButtonClicked: function () {
+                    //Delete task
+		              Tasks.deleteTask($scope.task.taskId);
+                    $ionicHistory.goBack();
+                    hideSheet();
+                }
+            });
+		
 	}
 	
 	$scope.editTask = function () {

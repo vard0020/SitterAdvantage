@@ -13,8 +13,15 @@
   <div id="kid" class="card">
 
       <div class="item item-text-wrap">
+          
+          <div id="profile-info">
+							<img id="profile-image-small" ng-src="img/{{kid.kidPicture}}">
+              <button  id="addPhoto" class="button button-clear button-positive" ng-click="editTask($index)">
+							Add photo
+              </button>
+          </div>
 
-        <div style="margin-bottom:15px;">
+        <div style="margin-bottom:15px;" id="myChange">
         <h2>First Name</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 

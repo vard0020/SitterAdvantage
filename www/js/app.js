@@ -144,16 +144,7 @@ angular.module('SitterAdvantage',
         }
       }
     })
-    .state('tab.edit-client', {
-      url: '/editClient/:clientId',
-      views: {
-        'tab-clients': {
-          templateUrl: 'templates/edit-client.html',
-          controller: 'EditClientCtrl'
-        }
-      }
-    })
-
+    
     .state('tab.edit-parent', {
       url: '/editParent/:parentId',
       views: {

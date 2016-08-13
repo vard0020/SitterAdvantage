@@ -77,13 +77,32 @@ ion-content div.scroll{
         height: 128px;
         margin: 30px auto 0;
         box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
-      margin-bottom: 5px;     
+        margin-bottom: 5px;     
       }
 
       .ionicon{
 
         color: blue;
       }
+
+#profile-image-small{
+        width: 70px;
+        height: 70px;
+        float:left;
+}
+
+#myChange {
+    clear: both;
+    padding-top:20px;
+}
+
+#addPhoto {
+    float:left;
+}
+
+.tab-item-active {
+    icon-on = ""
+}
 
 /*
 h3 {

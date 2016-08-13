@@ -9,8 +9,13 @@ angular.module('SitterAdvantage.emergencyControllers', ['ngCordova'])
     enableFriends: true
   };
 	
+    // get client in database
+            Clients.getParentsForClient(1).then(function (parentList) {
+                if (!parentList) return;
+                $scope.parents = parentList;
+            });
 
- $scope.selectedClient = Clients.getById(1);
+ 
   
   var showGPS = "Show my location"; 
   var hideGPS = "Hide Map"; 

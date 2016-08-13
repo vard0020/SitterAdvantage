@@ -1,6 +1,6 @@
 angular.module('SitterAdvantage.clientControllers', [])
-    .controller('ClientsCtrl', ["$scope", "Clients", "$ionicPopup", "$state",
- function ($scope, Clients, $ionicPopup, $state) {
+    .controller('ClientsCtrl', ["$scope", "Clients", "$ionicPopup", "$state", "$ionicActionSheet", "$ionicHistory",
+ function ($scope, Clients, $ionicPopup, $state,$ionicActionSheet, $ionicHistory) {
 
             console.log("ClientsCtrl is loaded");
             $scope.clients = [];
@@ -35,7 +35,7 @@ angular.module('SitterAdvantage.clientControllers', [])
 
                 var popUp = $ionicPopup.show({
                     template: '<input type="text" ng-model="data.menuItemText"/>',
-                    title: 'Edit Client Description',
+                    title: 'Edit Family Name',
                     scope: $scope,
                     buttons: [
                         {
@@ -64,6 +64,28 @@ angular.module('SitterAdvantage.clientControllers', [])
                     //$scope.saveClientDescription = LocalStorage.addMenuItem(res);
                 });
             };
+     
+            //delete client
+            $scope.deleteClient = function(){
+                
+                 var hideSheet = $ionicActionSheet.show({
+         
+                destructiveText: 'Delete Client',
+                cancelText: 'Cancel',
+
+                cancel: function () {
+                    hideSheet();
+                },
+            
+                destructiveButtonClicked: function () {
+                    //Delete client
+                    $ionicHistory.goBack();
+                    hideSheet();
+                }
+            });
+                
+                
+            };
 
             $scope.addClient = function () {
 
@@ -72,7 +94,7 @@ angular.module('SitterAdvantage.clientControllers', [])
 
                 var popUp = $ionicPopup.show({
                     template: '<input type="text" ng-model="data.menuItemText"/>',
-                    title: 'Add Client Description',
+                    title: 'Add Family Name',
                     scope: $scope,
                     buttons: [
                         {
@@ -255,8 +277,8 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('EditParentCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicHistory",
- function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory) {
+.controller('EditParentCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicHistory","$ionicActionSheet",
+ function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory,$ionicActionSheet) {
 
         $ionicNavBarDelegate.showBackButton(false);
      
@@ -278,8 +300,25 @@ angular.module('SitterAdvantage.clientControllers', [])
         }
 
         $scope.deleteParent = function () {
-            alert("deleted");
-        }
+            
+            var hideSheet = $ionicActionSheet.show({
+         
+                destructiveText: 'Delete Parent',
+                cancelText: 'Cancel',
+
+                cancel: function () {
+                    hideSheet();
+                },
+            
+                destructiveButtonClicked: function () {
+                    //Delete parent
+                    $ionicHistory.goBack();
+                    hideSheet();
+                }
+            });
+		
+	}
+        
 
 }])
 
@@ -306,8 +345,21 @@ angular.module('SitterAdvantage.clientControllers', [])
         }
 
         $scope.deleteKid = function () {
-            alert("deleted");
-            $state.go("tab.client-detail");
+             var hideSheet = $ionicActionSheet.show({
+         
+                destructiveText: 'Delete Kid',
+                cancelText: 'Cancel',
+
+                cancel: function () {
+                    hideSheet();
+                },
+            
+                destructiveButtonClicked: function () {
+                    //Delete kid
+                    hideSheet();
+                    $ionicHistory.goBack();
+                }
+            });
             //Note: after going to client-details we should land on kid segmented control, (ng-switch when = 2)instead of parent
         }
 
