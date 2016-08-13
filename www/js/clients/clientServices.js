@@ -217,11 +217,12 @@ angular.module('SitterAdvantage.clientServices', [])
             return d.promise;
         },
 
+
         addkidForClient: function (params) {
 
             var d = $q.defer();
 
-            var query = "INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture, ,clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            var query = "INSERT INTO kids (kidFirstname, kidLastname, kidBirthdate, kidGender, kidNotes, kidPicture,clientId,allergyDescription,disabilityDescription, medicationDescription) VALUES (?,?,?,?,?,?,?,?,?,?)";
             var queryErrorCallback = function (err) {
                 console.error(err);
                 d.resolve(err);
@@ -229,7 +230,6 @@ angular.module('SitterAdvantage.clientServices', [])
             var querySuccessCallback = function (tx, res) {
                 console.log("insert statement for adding new kid to newClient succeeded");
                 console.log(res);
-                kidId = res.insertId;
 
                 d.resolve(res.insertId);
 

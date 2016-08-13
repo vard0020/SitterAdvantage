@@ -30,6 +30,14 @@ angular.module('SitterAdvantage.taskControllers', [])
 		  $scope.isHideClientDescr = true;
 	  }
 
+	  // client in database
+	  Clients.getClientsList().then(function (clientList) {
+		  if (!clientList) return;
+		  $scope.clientArray = clientList;
+
+	  });
+
+
 		console.log("im inside new task controller");
 		$scope.cancelNewTask = function () {
 			//$state.go("tab.tasks");
@@ -80,7 +88,7 @@ angular.module('SitterAdvantage.taskControllers', [])
 
 
 	       //$scope.CategoryID = category.id;
-			alert("scope - "+ client.clientDesc);
+			//alert("scope - "+ client.clientDesc);
 
 			$scope.selectedClientId = client.clientId;
 

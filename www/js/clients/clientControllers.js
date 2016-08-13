@@ -338,17 +338,21 @@ angular.module('SitterAdvantage.clientControllers', [])
 .controller('EditKidCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicActionSheet", "$ionicHistory",
  function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicActionSheet, $ionicHistory) {
 
-        $scope.saveKid = function () {
 
-            $ionicHistory.goBack();
-            //Note: after going to client-details we should land on kid segmented control, (ng-switch when =1 ) instead of parent
-        }
-        
         Clients.getKidById($stateParams.kidId).then(function (kid) {
                 if (!kid) return;
                 $scope.kid = kid;
             });
 
+     $scope.saveKid = function () {
+
+         Clients.editKidInfo($scope.kid).then(function (res) {
+             if (!res) return;
+             $ionicHistory.goBack();
+         });
+
+         //Note: after going to client-details we should land on kid segmented control, (ng-switch when =1 ) instead of parent
+     }
         $scope.cancelKid = function () {
 
             $ionicHistory.goBack();
@@ -369,8 +373,11 @@ angular.module('SitterAdvantage.clientControllers', [])
             
                 destructiveButtonClicked: function () {
                     //Delete kid
-                    hideSheet();
-                    $ionicHistory.goBack();
+                    Clients.deleteKid($scope.kid.kidId).then(function (res) {
+
+                        $ionicHistory.goBack();
+                        hideSheet();
+                    });
                 }
             });
             //Note: after going to client-details we should land on kid segmented control, (ng-switch when = 2)instead of parent
@@ -427,13 +434,45 @@ angular.module('SitterAdvantage.clientControllers', [])
 
 }])
 
-.controller('NewKidCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicHistory",
- function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory) {
+.controller('NewKidCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicHistory","$ionicActionSheet",
+ function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory, $ionicActionSheet) {
 
         $ionicNavBarDelegate.showBackButton(false);
 
+     $scope.kid = {};
+     $scope.addPhoto = function () {
+
+         // Show the action sheet
+         var hideSheet = $ionicActionSheet.show({
+             buttons: [
+                 {
+                     text: 'Take Photo'
+                 },
+             ],
+             cancelText: 'Cancel',
+
+             cancel: function () {
+                 hideSheet();
+             },
+             buttonClicked: function (index) {
+                 //code for taking a new photo
+                 return true;
+             },
+
+             destructiveButtonClicked: function () {
+                 hideSheet();
+             }
+         });
+     }
         $scope.saveKid = function () {
-            $ionicHistory.goBack();
+
+            $scope.kid.clientId = $stateParams.clientId;
+            $scope.kid.kidPicture = "";
+            Clients.addkidForClient($scope.kid).then(function (res) {
+                if (!res) return;
+                $ionicHistory.goBack();
+            });
+
         }
 
         $scope.cancelKid = function () {
