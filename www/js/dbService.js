@@ -5,13 +5,13 @@ angular.module('SitterAdvantage.dbService', [])
 	//---------------------- function responsible to create all the tables once ----------------------
 	var createTables = function(){
 	  db.transaction(function(tx) {
-//	  	   tx.executeSql("DROP TABLE clients");
-//	  	   tx.executeSql("DROP TABLE parents");
-//	  	   tx.executeSql("DROP TABLE tasks");
-//	  	   tx.executeSql("DROP TABLE kids");
-//          tx.executeSql("DROP TABLE disabilities");
-//          tx.executeSql("DROP TABLE medications");
-//          tx.executeSql("DROP TABLE allergies");
+	  	//    tx.executeSql("DROP TABLE clients");
+	  	//    tx.executeSql("DROP TABLE parents");
+	  	//    tx.executeSql("DROP TABLE tasks");
+	  	//    tx.executeSql("DROP TABLE kids");
+         // tx.executeSql("DROP TABLE disabilities");
+         // tx.executeSql("DROP TABLE medications");
+         // tx.executeSql("DROP TABLE allergies");
 
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS clients (clientId integer primary key , clientDesc text)",[], function(){}, function(){});
 	      tx.executeSql("CREATE TABLE IF NOT EXISTS parents(parentId integer primary key , parentFirstname text, parentLastname text, parentStreet text, parentUnit text, parentCity text, parentState text, parentZipcode text, parentPrimaryphone text, parentSecondaryphone text, parentEmailid text, parentNotes text, clientId integer)",[], function(){}, function(){});  

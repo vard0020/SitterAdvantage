@@ -33,8 +33,8 @@ angular.module('SitterAdvantage',
       console.log("db should have been opened at this step");
             dbService.createTables();
             dbService.insertTestData();
-//            Tasks.loadFromDB();
-//            Clients.loadFromDB();
+            //Tasks.loadFromDB();
+            //Clients.loadFromDB();
     }
     });
 })
@@ -167,6 +167,9 @@ angular.module('SitterAdvantage',
 
           .state('tab.new-parent', {
       url: '/editClient/new-parent',
+              params:{
+                  clientId: 1
+              },
       views: {
         'tab-clients': {
           templateUrl: 'templates/new-parent.html',
@@ -176,6 +179,9 @@ angular.module('SitterAdvantage',
     })
            .state('tab.new-kid', {
       url: '/editClient/new-kid',
+               params:{
+                   clientId: 1
+               },
       views: {
         'tab-clients': {
           templateUrl: 'templates/new-kid.html',

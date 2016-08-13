@@ -361,10 +361,10 @@ angular.module('SitterAdvantage.clientServices', [])
 
             var d = $q.defer();
             var id = parentInfo.parentId;
-            var query = 'UPDATE kids SET parentFirstname = ?, parentLastname = ?, parentNotes = ?, parentStreet = ?, parentUnit = ?, parentCity = ?, parentState = ?, parentZipcode = ?, parentPrimaryphone = ?, parentSecondaryphone = ?, parentEmailid = ?, clientId = ? WHERE parentId=?';
+            var query = 'UPDATE parents SET parentFirstname = ?, parentLastname = ?, parentNotes = ?, parentStreet = ?, parentUnit = ?, parentCity = ?, parentState = ?, parentZipcode = ?, parentPrimaryphone = ?, parentSecondaryphone = ?, parentEmailid = ?, clientId = ? WHERE parentId=?';
             
             var queryErrorCallback = function (err) {
-                console.error(err);
+                console.log(err);
                 d.resolve(err);
             }
             var querySuccessCallback = function (tx, res) {

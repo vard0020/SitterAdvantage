@@ -156,7 +156,13 @@ angular.module('SitterAdvantage.clientControllers', [])
         $ionicNavBarDelegate.showBackButton(true);
         $scope.selectedClient = {};
         //used stateParams to access clientId which allows us to navigate to each client's detail page.
-     
+
+     //Get Client
+     Clients.getClientById($stateParams.clientId).then(function (client) {
+         if (!client) return;
+         $scope.selectedClient = client;
+     });
+
      //Get parents
          Clients.getParentsForClient($stateParams.clientId).then(function (parents) {
                 if (!parents) return;
@@ -251,20 +257,18 @@ angular.module('SitterAdvantage.clientControllers', [])
         //handler for adding new task
         $scope.addNewTask = function () {
 
-            $state.go("tab.new-task_client", {
-                clientId: $stateParams.clientId
-            });
+            $state.go("tab.new-task_client", { clientId: $stateParams.clientId });
         }
 
         //handler for adding new parent
         $scope.addNewParent = function () {
 
-            $state.go("tab.new-parent");
+            $state.go("tab.new-parent",{ clientId: $stateParams.clientId });
         }
 
         //handler for adding new kid
         $scope.addNewKid = function () {
-            $state.go("tab.new-kid");
+            $state.go("tab.new-kid",{ clientId: $stateParams.clientId });
         }
 
         $scope.editClient = function (selectedClient) {
@@ -281,6 +285,8 @@ angular.module('SitterAdvantage.clientControllers', [])
  function ($scope, $stateParams, Clients, $ionicNavBarDelegate, $state, $ionicHistory,$ionicActionSheet) {
 
         $ionicNavBarDelegate.showBackButton(false);
+
+     //$scope.params = {};
      
       Clients.getParentById($stateParams.parentId).then(function (parent) {
                 if (!parent) return;
@@ -289,7 +295,12 @@ angular.module('SitterAdvantage.clientControllers', [])
      
         $scope.saveParent = function () {
 
-            $ionicHistory.goBack();
+            //$scope.params.clientId = $stateParams.clientId;
+            Clients.editParentInfo($scope.parent).then(function (parentId) {
+                if (!parentId) return;
+
+                $ionicHistory.goBack();
+            });
         }
 
         $scope.cancelParent = function () {
@@ -311,15 +322,17 @@ angular.module('SitterAdvantage.clientControllers', [])
                 },
             
                 destructiveButtonClicked: function () {
-                    //Delete parent
-                    $ionicHistory.goBack();
-                    hideSheet();
+
+                    Clients.deleteParent($scope.parent.parentId).then(function (res) {
+
+                        //Delete parent
+                        $ionicHistory.goBack();
+                        hideSheet();
+                    });
                 }
             });
 		
 	}
-        
-
 }])
 
 .controller('EditKidCtrl', ["$scope", "$stateParams", "Clients", "$ionicNavBarDelegate", "$state", "$ionicActionSheet", "$ionicHistory",
@@ -395,8 +408,16 @@ angular.module('SitterAdvantage.clientControllers', [])
 
         $ionicNavBarDelegate.showBackButton(false);
 
+     $scope.params = {};
+
         $scope.saveParent = function () {
-            $ionicHistory.goBack();
+
+            $scope.params.clientId = $stateParams.clientId;
+            Clients.addParentForClient($scope.params).then(function (parentId) {
+                if (!parentId) return;
+
+                $ionicHistory.goBack();
+            });
         }
 
         $scope.cancelParent = function () {

@@ -1,11 +1,11 @@
 <ion-view view-title="Edit Kid">
   <ion-nav-buttons side="secondary">
 
-    <button class="button correctSize" ng-click="saveKid()" ng-hide="toggleVisibility">Save</button>
+    <button class="button correctSize" ng-click="saveKid()">Save</button>
 
   </ion-nav-buttons>
   <ion-nav-buttons side="primary">
-    <button class="button correctSize secondary" ng-click="cancelKid()" ng-hide="toggleVisibility">Cancel</button>
+    <button class="button correctSize secondary" ng-click="cancelKid()">Cancel</button>
 
   </ion-nav-buttons>
   <ion-content>
@@ -25,21 +25,21 @@
         <h2>First Name</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input style="font-weight:600;" ng-disabled="!disableEnableForm" class="item-input textDisable ios-blue" type="text" placeholder="First Name" value="{{kid.kidFirstname}}">
+          <input style="font-weight:600;" class="item-input textDisable ios-blue" type="text" placeholder="First Name" value="{{kid.kidFirstname}}">
         </div>
 
         <div style="margin-bottom:15px;">
           <h2>Last Name</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Last Name" value="{{kid.kidLastName}}">
+          <input class="item-input textDisable" type="text" placeholder="Last Name" value="{{kid.kidLastName}}">
         </div>
 
         <div style="margin-bottom:15px;">
           <h2>Birthday</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="date" placeholder="Birthday" value="{{kid.kidBirthday}}">
+          <input class="item-input textDisable" type="date" placeholder="Birthday" value="{{kid.kidBirthday}}">
 
         </div>
 
@@ -47,33 +47,33 @@
           <h2>Gender</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Gender" value="{{kid.kidGender}}">
+          <input class="item-input textDisable" type="text" placeholder="Gender" value="{{kid.kidGender}}">
         </div>
         <div style="margin-bottom:15px;">
           <h2>Allergies</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Allergies" value="{{kid.Allergies}}">
+          <input class="item-input textDisable" type="text" placeholder="Allergies" value="{{kid.Allergies}}">
 
         </div>
         <div style="margin-bottom:15px;">
           <h2>Disabilities</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
 
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Disabilities" value="{{kid.kidDisabilities}}">
+          <input class="item-input textDisable" type="text" placeholder="Disabilities" value="{{kid.kidDisabilities}}">
 
         </div>
 
         <div style="margin-bottom:15px;">
           <h2>Medications</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Medications" value="{{kids.kidsMedications}}">
+          <input class="item-input textDisable" type="text" placeholder="Medications" value="{{kids.kidsMedications}}">
         </div>
 
       <div style="margin-bottom:15px;">
           <h2>Notes</h2>
           <hr style="height:1px;margin-top:5px;margin-bottom:0px;border:none;color:#333;background-color:#ddd;" />
-          <input ng-disabled="!disableEnableForm" class="item-input textDisable" type="text" placeholder="Notes" value="{{kid.kidNotes}}">
+          <input class="item-input textDisable" type="text" placeholder="Notes" value="{{kid.kidNotes}}">
         </div>
 
   </div>
